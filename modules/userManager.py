@@ -11,10 +11,8 @@ def create(id, pw):
         # users.jsonを読み込み
         users = json.load(open(USERS_FILE_PATH, 'r'))
         # ユーザーを作成
-        # TODO パスワードの暗号化処理
         # SHA-256でハッシュ化
         hashed_pw = get_digest(pw)
-        # users[id] = {"pw": pw}
         users[id] = {"pw": hashed_pw}
         
         # users.jsonを書き込み
