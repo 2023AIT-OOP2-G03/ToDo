@@ -1,4 +1,5 @@
 import json
+import userManager
 
 USERS_FILE_PATH = './data/users.json'
 
@@ -7,7 +8,7 @@ def login(id, pw):
     # users.jsonを読み込み
     users = json.load(open(USERS_FILE_PATH, 'r'))
     # ユーザーの存在を確認
-    if id in users:
+    if userManager.check(id):
         # パスワードの確認
         if users[id]['pw'] == pw:
             return True
