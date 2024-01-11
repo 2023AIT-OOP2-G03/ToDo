@@ -7,9 +7,13 @@ class task_status(Enum):
     DONE = 4
 
 class task:
-    name = "買い物に行く"
-    description = "卵と牛乳を買う"
-    status = task_status.NOT_READY
+    def __init__(self, name = "", description = "", status = task_status.NOT_READY):
+        self.name = name
+        self.description = description
+        self.status = status
+
+    def __str__(self):
+        return f"{self.name}\n {self.description}\n {self.status}"
     
     def get_name(self):
         return self.name
