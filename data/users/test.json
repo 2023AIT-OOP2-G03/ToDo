@@ -1,40 +1,4 @@
 {
     "pw": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
-    "tasks": {
-        "c55ec65d-87a1-4512-9ade-d0a2e38df0ce": {
-            "name": "test",
-            "description": "test",
-            "status": "not ready"
-        },
-        "92299ad4-f051-4345-ab30-f25da9f57da7": {
-            "name": "test",
-            "description": "test",
-            "status": "not ready"
-        },
-        "23d0fd19-ac6d-4814-badd-a0b6357da0c6": {
-            "name": "test",
-            "description": "test",
-            "status": "not ready"
-        },
-        "5a11897a-51ed-4e81-8829-ec8acbdf6a5b": {
-            "name": "test",
-            "description": "test",
-            "status": "not ready"
-        },
-        "6c91c462-ee9a-4132-931b-d1862e6e1b20": {
-            "name": "test",
-            "description": "test",
-            "status": "not ready"
-        },
-        "a0bfe099-2acb-4afd-8a5a-aa30e06f3e4f": {
-            "name": "test",
-            "description": "test",
-            "status": "not ready"
-        },
-        "35170f57-cc71-4a35-8961-453f9a9d940a": {
-            "name": "test",
-            "description": "test",
-            "status": "not ready"
-        }
-    }
+    "tasks": {}
 }

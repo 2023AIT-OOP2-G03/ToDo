@@ -11,7 +11,7 @@ def add_task(userid, task: taskManager.task):
     
     
 def delete_task(userid, taskid):
-    if check_task(taskid):
+    if check_task(userid, taskid):
         tasks = get_tasks(userid)
         tasks.pop(taskid)
         set_tasks(userid, tasks)
@@ -51,5 +51,8 @@ if __name__ == '__main__':
     for i in tasks:
         print(i)
         print(tasks[i])
+        delete_task("test", i)
+    
+    print(get_tasks("test"))
     
     pass
