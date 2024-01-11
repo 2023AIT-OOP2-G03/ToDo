@@ -7,7 +7,6 @@ app = Flask(__name__, static_folder='web/static', template_folder='web/templates
 @app.route('/registration', methods=["GET"])
 def registration_show(message=None):
     return render_template("create.html", message=message)
-#登録ページ
 @app.route('/registration', methods=["POST"])
 def registration():
     username = request.form.get('user', None)
