@@ -1,34 +1,37 @@
 from flask import Flask, render_template, request
-from modules import userManager
+from modules import login, userManager
 
 app = Flask(__name__, static_folder='web/static', template_folder='web/templates')
 
 #登録ページ
 @app.route('/registration', methods=["GET"])
-def registration_show():
-    return render_template("touroku.html", message="waegrhtjyfu")
+def registration_show(message=None):
+    return render_template("create.html", message=message)
 #登録ページ
 @app.route('/registration', methods=["POST"])
 def registration():
     username = request.form.get('user', None)
     password = request.form.get('pw', None)
     result = userManager.create(username, password)
-    print ("--------")
-    print (result)
-    print ("--------")
-    if (result==0):
-        return render_template("temp.html", message="登録完了")
+    if (result==True):
+        return render_template("login.html", message="登録完了しました")
     else:
-        return render_template("touroku.html", message=result)
+        return registration_show(result)
 
 #ログインページ
 @app.route('/', methods=["GET"])
-def index():
-    return render_template("temp.html")
+def index(message=None):
+    return render_template("login.html", message=message)
 @app.route('/', methods=["POST"])
-def login():
-    return render_template("temp.html", message="ロ了")
+def login_():
+    username = request.form.get('user', None)
+    password = request.form.get('pw', None)
+    if (username==None and password==None): return index()
+
+    result = login.login(username, password)
+
+    if (result==True): return render_template("todo.html")
+    else: return index(message=result)
 
 if __name__ == '__main__':
-    app.run(debug=False)
-    
+    app.run(debug=True)
