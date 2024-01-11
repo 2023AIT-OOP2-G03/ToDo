@@ -20,7 +20,7 @@ def create(id, pw):
         
         # ユーザーのタスクファイルを作成
         tasks_file_path = USERS_DIR + id + '.json'
-        json.dump(user, open(tasks_file_path, 'w'))
+        json.dump(user, open(tasks_file_path, 'w'), indent = 4)
         
         # TODO: なぜか「0」を返している、main.pyを編集してTrueにすべき
         # return True
