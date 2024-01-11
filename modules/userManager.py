@@ -1,5 +1,7 @@
 import json
 
+USERS_FILE_PATH = './data/users.json'
+
 # 作成
 def create(id, pw):
     if check(id):
@@ -7,17 +9,17 @@ def create(id, pw):
         return False
     else:
         # users.jsonを読み込み
-        users = json.load(open('users.json', 'r'))
+        users = json.load(open(USERS_FILE_PATH, 'r'))
         # ユーザーを作成
-        users[id]["pass"] = pw
+        users[id] = {"pw": pw}
         # users.jsonを書き込み
-        json.dump(users, open('users.json', 'w'))
+        json.dump(users, open(USERS_FILE_PATH, 'w'))
         return True
 
 # ユーザーの存在を確認
 def check(id):
     # users.jsonを読み込み
-    users = json.load(open('users.json', 'r'))
+    users = json.load(open(USERS_FILE_PATH, 'r'))
     # ユーザーの存在を確認
     if id in users:
         return True
@@ -25,5 +27,7 @@ def check(id):
         return False
 
 if __name__ == '__main__':
-    # ユーザーの存在を確認
+    # test
+    print(create('test', 'test'))
     print(check('test'))
+    
