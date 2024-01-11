@@ -34,12 +34,24 @@ def create(id, pw):
 def check(id):
     # users.jsonを読み込み
     users = json.load(open(USERS_FILE_PATH, 'r'))
+    flag_users = id in users
+    
+    if flag_users:
+        print("users.jsonにユーザーが存在します")
     
     # タスクファイルの存在を確認
+    flag_tasks = os.path.exists(TASKS_FILE_DIR + id + '.json')
+    if flag_tasks:
+        print("タスクファイルが存在します")
     
     # ユーザーの存在を確認
-    if id in users:
+    if flag_users and flag_tasks:
         return True
+    elif flag_users or flag_tasks:
+        print("!!!ユーザーの存在に矛盾があります!!!")
+        print("生合成解決のため、ユーザーを削除します")
+        delete(id, force=True)
+        return False
     else:
         return False
     
@@ -48,8 +60,8 @@ def get_digest(pw):
     hashed_pw = hashlib.sha256(pw.encode("utf-8")).hexdigest()
     return hashed_pw
 
-def delete(id):
-    if check(id):
+def delete(id, force = False):
+    if check(id) or force:
         # users.jsonを読み込み
         users = json.load(open(USERS_FILE_PATH, 'r'))
         users.pop(id) 
