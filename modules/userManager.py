@@ -15,7 +15,7 @@ def create(id, pw):
         
         user = {
             "pw": hashed_pw,
-            "tasks": []
+            "tasks": {}
         }
         
         # ユーザーのタスクファイルを作成

@@ -1,10 +1,11 @@
 from enum import Enum
+import json
 
-class task_status(Enum):
-    NOT_READY = 1
-    READY = 2
-    DOING = 3
-    DONE = 4
+class task_status(str, Enum):
+    NOT_READY = "not ready"
+    READY = "ready"
+    DOING = "doing"
+    DONE = "done"
 
 class task:
     def __init__(self, name = "", description = "", status = task_status.NOT_READY):
@@ -13,7 +14,8 @@ class task:
         self.status = status
 
     def __str__(self):
-        return f"{self.name}\n {self.description}\n {self.status}"
+        return f"{self.name}\n desc: {self.description}\n status: {self.status}"
+
     
     def get_name(self):
         return self.name
@@ -32,3 +34,10 @@ class task:
         
     def set_status(self, status):
         self.status = status
+
+    def to_dict(self):
+        return {
+            "name": self.name,
+            "description": self.description,
+            "status": self.status
+        } 
