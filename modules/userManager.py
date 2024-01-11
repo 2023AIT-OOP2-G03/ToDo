@@ -17,7 +17,7 @@ def create(id, pw):
         
         # users.jsonを書き込み
         json.dump(users, open(USERS_FILE_PATH, 'w'))
-        # TODO なぜか「0」を返している、main.pyを編集してTrueにすべき
+        # TODO: なぜか「0」を返している、main.pyを編集してTrueにすべき
         # return True
         return 0
 
