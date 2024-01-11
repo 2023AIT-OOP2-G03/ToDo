@@ -16,8 +16,10 @@ def registration():
     print ("--------")
     print (result)
     print ("--------")
-    if (result==0): return render_template("temp.html", message="登録完了")
-    else: render_template("touroku.html", message=result)
+    if (result==0):
+        return render_template("temp.html", message="登録完了")
+    else:
+        return render_template("touroku.html", message=result)
 
 #ログインページ
 @app.route('/', methods=["GET"])
