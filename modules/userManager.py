@@ -1,4 +1,5 @@
 import json
+import hashlib
 
 USERS_FILE_PATH = './data/users.json'
 
