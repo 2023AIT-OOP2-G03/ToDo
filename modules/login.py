@@ -1,7 +1,7 @@
 import json
 import hashlib
 
-from . import userManager
+import userManager
 
 USERS_FILE_PATH = './data/users.json'
 
