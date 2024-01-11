@@ -71,6 +71,3 @@ if __name__ == '__main__':
     print(check('test'))
     # print(delete('test'))
     print(check('test'))
-    
-    pass
-    
