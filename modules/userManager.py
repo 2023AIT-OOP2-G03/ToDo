@@ -15,7 +15,7 @@ def create(id, pw):
         users[id] = {"pw": pw}
         # users.jsonを書き込み
         json.dump(users, open(USERS_FILE_PATH, 'w'))
-        return True
+        return 0
 
 # ユーザーの存在を確認
 def check(id):
