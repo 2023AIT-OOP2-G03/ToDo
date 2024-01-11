@@ -9,16 +9,50 @@
 <body>
 
 <div id="app">
-    <h1>Todo List</h1>
+    <h1>Todo-List</h1>
     <form id="taskForm">
         <input type="text" id="taskInput" placeholder="Enter task">
         <button type="button" onclick="addTask()">Add Task</button>
     </form>
     <ul id="taskList">
+        <h2>Current Tasks</h2>
         <!-- Task items will be added dynamically here -->
     </ul>
 </div>
 
-<script src="static/todo.js"></script>
+<script>
+function addTask() {
+    var taskInput = document.getElementById('taskInput');
+    var taskList = document.getElementById('taskList');
+
+    if (taskInput.value.trim() !== '') {
+        // Create a new list item
+        var listItem = document.createElement('li');
+        listItem.className = 'taskItem';
+
+        // Create a span for the task text
+        var taskText = document.createElement('span');
+        taskText.textContent = taskInput.value;
+        listItem.appendChild(taskText);
+
+        // Create a button for deleting the task
+        var deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.className = 'deleteButton';
+        deleteButton.addEventListener('click', function () {
+            taskList.removeChild(listItem);
+        });
+        listItem.appendChild(deleteButton);
+
+        // Add the list item to the task list
+        taskList.appendChild(listItem);
+
+        // Clear the input field
+        taskInput.value = '';
+    }
+}
+</script>
+
 </body>
 </html>
+
