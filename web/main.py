@@ -7,8 +7,8 @@ app = Flask(__name__)
 
 #登録ページ
 @app.route('/registration', methods=["GET"])
-def registration_show():
-    return render_template("test/test.html")
+def registration_show(error=None):
+    return render_template("test/test.html", error=error)
 #登録ページ
 @app.route('/registration', methods=["POST"])
 def registration():
@@ -16,13 +16,13 @@ def registration():
     password = request.form.get('pw', None)
     #関数名は仮
     result = regi.registration(username, password)
-    if result: index()
-    else: return render_template("registration_failure.html")
+    if result: index("登録完了")
+    else: registration_show(result)
 
 #ログインページ
 @app.route('/')
-def index():
-    return render_template("test.html")
+def index(message=None):
+    return render_template("test.html", message=message)
 
 if __name__ == '__main__':
     app.run(debug=True)
