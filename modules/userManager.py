@@ -47,7 +47,7 @@ def check(id):
         print(f"\tusers.json: {flag_users}")
         print(f"\t{id}.json: {flag_tasks}")
         print("整合性解決のため、ユーザーを削除します")
-        delete(id, force=True)
+        __force_delete(id)
         return False
     else:
         return False
@@ -57,19 +57,26 @@ def get_digest(pw):
     hashed_pw = hashlib.sha256(pw.encode("utf-8")).hexdigest()
     return hashed_pw
 
-def delete(id, force = False):
-    if check(id) or force:
-        # users.jsonを読み込み
-        users = json.load(open(USERS_FILE_PATH, 'r'))
-        users.pop(id) 
-        
+def delete(id):
+    if check(id):
+        __force_delete(id)
+    else:
+        return "ユーザーが存在しません"
+
+def __force_delete(id):
+    # users.jsonを読み込み
+    users = json.load(open(USERS_FILE_PATH, 'r'))
+    if id in users:
+        users.pop(id)
+    else:
+        print("\tusers.jsonにユーザーが存在しなかったため、削除できませんでした")
+    
+    if os.path.exists(TASKS_FILE_DIR + id + '.json'):
         json.dump(users, open(USERS_FILE_PATH, 'w'))
-        
         # タスクファイルを削除
         os.remove(TASKS_FILE_DIR + id + '.json')
     else:
-        return "ユーザーが存在しません"
-    
+        print(f"\t{TASKS_FILE_DIR + id + '.json'}が存在しなかったため、削除できませんでした")
     
 
 if __name__ == '__main__':
