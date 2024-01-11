@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from modules import login, userManager
+from modules import userManager
 
 app = Flask(__name__)
 
