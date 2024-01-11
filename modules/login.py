@@ -12,9 +12,9 @@ def login(id, pw):
         if users[id]['pw'] == pw:
             return True
         else:
-            return False
+            return "ログインに失敗しました。パスワードが違います。"
     else:
-        return False
+        return "ログインに失敗しました。ユーザーが存在しません。"
 
 if __name__ == '__main__':
     # test
