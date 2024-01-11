@@ -3,6 +3,8 @@ import hashlib
 
 USERS_FILE_PATH = './data/users.json'
 
+TASKS_FILE_DIR = './data/tasks/'
+
 # 作成
 def create(id, pw):
     if check(id):
@@ -14,6 +16,13 @@ def create(id, pw):
         # パスワードをハッシュ化
         hashed_pw = get_digest(pw)
         users[id] = {"pw": hashed_pw}
+        
+        
+        # ユーザーのタスクファイルを作成
+        tasks_file = open(TASKS_FILE_DIR + id + '.json', 'w')
+        # 空のjsonファイルを作成
+        tasks_file.write('{}')
+        tasks_file.close()
         
         # users.jsonを書き込み
         json.dump(users, open(USERS_FILE_PATH, 'w'))
