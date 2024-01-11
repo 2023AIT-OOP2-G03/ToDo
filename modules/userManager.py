@@ -17,7 +17,6 @@ def create(id, pw):
         hashed_pw = get_digest(pw)
         users[id] = {"pw": hashed_pw}
         
-        
         # ユーザーのタスクファイルを作成
         tasks_file = open(TASKS_FILE_DIR + id + '.json', 'w')
         # 空のjsonファイルを作成
@@ -34,6 +33,7 @@ def create(id, pw):
 def check(id):
     # users.jsonを読み込み
     users = json.load(open(USERS_FILE_PATH, 'r'))
+    
     # ユーザーの存在を確認
     if id in users:
         return True
@@ -44,6 +44,10 @@ def get_digest(pw):
     # SHA256でハッシュ化
     hashed_pw = hashlib.sha256(pw.encode("utf-8")).hexdigest()
     return hashed_pw
+
+# TODO: ユーザーの削除の実装
+def delete(pw):
+    pass
 
 if __name__ == '__main__':
     # test
