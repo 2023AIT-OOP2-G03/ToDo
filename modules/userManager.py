@@ -11,6 +11,7 @@ def create(id, pw):
         # users.jsonを読み込み
         users = json.load(open(USERS_FILE_PATH, 'r'))
         # ユーザーを作成
+        # TODO パスワードの暗号化処理
         users[id] = {"pw": pw}
         # users.jsonを書き込み
         json.dump(users, open(USERS_FILE_PATH, 'w'))
@@ -28,6 +29,8 @@ def check(id):
 
 if __name__ == '__main__':
     # test
-    print(create('test', 'test'))
-    print(check('test'))
+    # print(create('test', 'test'))
+    # print(check('test'))
+    
+    pass
     
