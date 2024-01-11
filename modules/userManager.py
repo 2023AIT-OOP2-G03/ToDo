@@ -11,7 +11,7 @@ def create(id, pw):
         # users.jsonを読み込み
         users = json.load(open(USERS_FILE_PATH, 'r'))
         # ユーザーを作成
-        # SHA-256でハッシュ化
+        # パスワードをハッシュ化
         hashed_pw = get_digest(pw)
         users[id] = {"pw": hashed_pw}
         
@@ -32,8 +32,8 @@ def check(id):
         return False
     
 def get_digest(pw):
+    # SHA256でハッシュ化
     hashed_pw = hashlib.sha256(pw.encode("utf-8")).hexdigest()
-    # print(hashed_pw)
     return hashed_pw
 
 if __name__ == '__main__':
