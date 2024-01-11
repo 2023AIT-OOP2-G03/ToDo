@@ -1,5 +1,6 @@
 import json
 import hashlib
+import os
 
 USERS_FILE_PATH = './data/users.json'
 
@@ -34,6 +35,8 @@ def check(id):
     # users.jsonを読み込み
     users = json.load(open(USERS_FILE_PATH, 'r'))
     
+    # タスクファイルの存在を確認
+    
     # ユーザーの存在を確認
     if id in users:
         return True
@@ -45,9 +48,18 @@ def get_digest(pw):
     hashed_pw = hashlib.sha256(pw.encode("utf-8")).hexdigest()
     return hashed_pw
 
-# TODO: ユーザーの削除の実装
-def delete(pw):
-    pass
+def delete(id):
+    if check(id):
+        # users.jsonを読み込み
+        users = json.load(open(USERS_FILE_PATH, 'rw'))
+        users.pop(id)
+        
+        # タスクファイルを削除
+        os.remove(TASKS_FILE_DIR + id + '.json')
+    else:
+        return "ユーザーが存在しません"
+    
+    
 
 if __name__ == '__main__':
     # test
