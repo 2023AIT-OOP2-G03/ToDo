@@ -20,8 +20,11 @@ class task:
     def get_status(self):
         return self.status
     
-    def create():
-        pass
+    def set_name(self, name):
+        self.name = name
     
-    def delete():
-        pass
+    def set_description(self, description):
+        self.description = description
+        
+    def set_status(self, status):
+        self.status = status
