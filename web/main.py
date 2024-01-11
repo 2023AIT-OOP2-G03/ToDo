@@ -15,7 +15,7 @@ def index():
 
             # アップロードが完了したメッセージを表示
             message = 'アップロードが完了しました！'
-            return render_template('index.html', message=message)
+            return render_template('newacount.html', message=message)
 
     return render_template('index.html', message=None)
 
