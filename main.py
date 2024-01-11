@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from modules import userManager
+from modules import login, userManager
 
 app = Flask(__name__, static_folder='web/static', template_folder='web/templates')
 
@@ -20,14 +20,20 @@ def registration():
 
 #ログインページ
 @app.route('/', methods=["GET"])
-def index():
-    return render_template("login.html")
+def index(message=None):
+    return render_template("login.html", message=message)
 @app.route('/', methods=["POST"])
-def login():
+def login_():
     username = request.form.get('user', None)
     password = request.form.get('pw', None)
-    print(username, password)
-    return render_template("login.html", message="ロ了")
+    # if (username==None and password==None):
+    #     print("username or password is None")
+        # return index()
+    result = login.login(username, password)
+    if (result==True):
+        return index(message="ログイン完了")
+    else:
+        return index(message=result)
 
 if __name__ == '__main__':
     app.run(debug=True)

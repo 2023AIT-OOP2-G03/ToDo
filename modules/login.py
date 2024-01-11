@@ -1,6 +1,5 @@
 import json
-
-import userManager
+from modules import userManager
 
 USERS_FILE_PATH = './data/users.json'
 

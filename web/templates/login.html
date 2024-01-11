@@ -85,7 +85,7 @@
     {% else %}
         <h2>ログイン</h2>
     {% endif %}
-    <form action="/registration" method="post">
+    <form action="/" method="post">
         <div class="form-group">
         <label for="username">Username:</label>
         <input type="text" name="user" placeholder="名前" required>
@@ -97,7 +97,7 @@
         <button type="submit" class="login-button">ログイン</button>
         <br>
         <p></p>
-        <button type="button" class="newcreate-button"><a href="./creat.html">新規作成</a></button>
+        <button type="button" class="newcreate-button"><a href="/registration">新規作成</a></button>
     </form>
     </div>
 </body>
