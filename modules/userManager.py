@@ -6,7 +6,7 @@ USERS_FILE_PATH = './data/users.json'
 # 作成
 def create(id, pw):
     if check(id):
-        return 'ユーザーが存在します'
+        return "ユーザーが存在します"
     else:
         # users.jsonを読み込み
         users = json.load(open(USERS_FILE_PATH, 'r'))
@@ -17,6 +17,8 @@ def create(id, pw):
         
         # users.jsonを書き込み
         json.dump(users, open(USERS_FILE_PATH, 'w'))
+        # TODO なぜか「0」を返している、main.pyを編集してTrueにすべき
+        # return True
         return 0
 
 # ユーザーの存在を確認
