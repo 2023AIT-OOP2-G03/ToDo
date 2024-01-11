@@ -6,7 +6,7 @@ USERS_FILE_PATH = './data/users.json'
 def create(id, pw):
     if check(id):
         print('ユーザーが存在します')
-        return False
+        return 'ユーザーが存在します'
     else:
         # users.jsonを読み込み
         users = json.load(open(USERS_FILE_PATH, 'r'))
