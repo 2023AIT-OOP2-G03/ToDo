@@ -1,4 +1,5 @@
 import json
+
 import userManager
 
 USERS_FILE_PATH = './data/users.json'
@@ -10,7 +11,7 @@ def login(id, pw):
     # ユーザーの存在を確認
     if userManager.check(id):
         # パスワードの確認
-        if users[id]['pw'] == pw:
+        if users[id]['pw'] == userManager.get_digest(pw):
             return True
         else:
             return "ログインに失敗しました。パスワードが違います。"
