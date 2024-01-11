@@ -36,20 +36,17 @@ def check(id):
     users = json.load(open(USERS_FILE_PATH, 'r'))
     flag_users = id in users
     
-    if flag_users:
-        print("users.jsonにユーザーが存在します")
-    
     # タスクファイルの存在を確認
     flag_tasks = os.path.exists(TASKS_FILE_DIR + id + '.json')
-    if flag_tasks:
-        print("タスクファイルが存在します")
     
     # ユーザーの存在を確認
     if flag_users and flag_tasks:
         return True
     elif flag_users or flag_tasks:
         print("!!!ユーザーの存在に矛盾があります!!!")
-        print("生合成解決のため、ユーザーを削除します")
+        print(f"\tusers.json: {flag_users}")
+        print(f"\t{id}.json: {flag_tasks}")
+        print("整合性解決のため、ユーザーを削除します")
         delete(id, force=True)
         return False
     else:
