@@ -3,13 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/todo.css">
+    <!-- <link rel="stylesheet" href="static/todo.css"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='todo.css') }}">
     <title>Todo List</title>
+    <style>
+/* Add your styling here */
+#app {
+    max-width: 600px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+}
+
+#taskList {
+    list-style: none;
+    padding: 0;
+}
+
+.taskItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ddd;
+    margin: 5px 0;
+    padding: 10px;
+}
+
+.deleteButton {
+    cursor: pointer;
+    background-color: #ff4d4d;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+        </style>
 </head>
 <body>
 
 <div id="app">
     <h1>Todo-List</h1>
+    {% if message %}
+    <h2>ユーザID:</h2><h2 id="username">{{ message }}</h2>
+    {% endif %}
     <form id="taskForm">
         <input type="text" id="taskInput" placeholder="Enter task">
         <button type="button" onclick="addTask()">Add Task</button>
@@ -21,6 +57,7 @@
 </div>
 
 <script>
+    console.log(document.querySelector('#username').textContent)
 function addTask() {
     var taskInput = document.getElementById('taskInput');
     var taskList = document.getElementById('taskList');

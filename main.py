@@ -29,7 +29,7 @@ def login_():
 
     result = login.login(username, password)
 
-    if (result==True): return render_template("todo.html")
+    if (result==True): return render_template("todo.html", message=username)
     else: return index(message=result)
 
 if __name__ == '__main__':
