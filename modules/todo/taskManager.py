@@ -18,24 +18,65 @@ class task:
 
     
     def get_name(self):
+        """タスク名を取得する
+        
+        returns:
+            str: タスク名
+        """
         return self.name
 
     def get_description(self):
+        """タスクの説明を取得する
+        
+        returns:
+            str: タスクの説明
+        """
         return self.description
     
     def get_status(self):
+        """タスクのステータスを取得する
+        
+        returns:
+            str: タスクのステータス
+        """
         return self.status
     
     def set_name(self, name):
+        """タスク名を設定する
+        
+        args:
+            name (str): タスク名
+        returns:
+            str: タスク名
+        """
         self.name = name
     
     def set_description(self, description):
+        """タスクの説明を設定する
+        
+        args:
+            description (str): タスクの説明
+        returns:
+            str: タスクの説明
+        """
         self.description = description
         
     def set_status(self, status):
+        """タスクのステータスを設定する
+        
+        args:
+            status (str): タスクのステータス
+        returns:
+            str: タスクのステータス
+        """
         self.status = status
 
     def to_dict(self):
+        """タスクを辞書型に変換する
+        
+        returns:
+            dict: タスクの辞書型
+        """
         return {
             "name": self.name,
             "description": self.description,
