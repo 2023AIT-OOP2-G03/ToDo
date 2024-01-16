@@ -6,6 +6,15 @@ USERS_DIR = './data/users/'
 
 # 作成
 def create(id, pw):
+    """ユーザーを作成する
+    
+    args:
+        id (str): ユーザーID
+        pw (str): パスワード
+    returns:
+        bool: True(ユーザー作成成功時)
+        int: 0(ユーザー作成失敗時)
+    """
     if check(id):
         return "ユーザーが存在します"
     else:
@@ -28,6 +37,13 @@ def create(id, pw):
 
 # ユーザーの存在を確認
 def check(id):
+    """ユーザーの存在を確認する
+    
+    args:
+        id (str): ユーザーID
+    returns:
+        bool: ユーザーの存在(True: 存在する, False: 存在しない)
+    """
     # タスクファイルの存在を確認
     flag_tasks = os.path.exists(USERS_DIR + id + '.json')
     
@@ -43,6 +59,11 @@ def get_digest(pw):
     return hashed_pw
 
 def delete(id):
+    """ユーザーを削除する
+    
+    args:
+        id (str): ユーザーID
+    """
     if check(id):
         __force_delete(id)
     else:
@@ -56,6 +77,13 @@ def __force_delete(id):
         print(f"\t{USERS_DIR + id + '.json'}が存在しなかったため、削除できませんでした")
 
 def get_pw(id):
+    """ユーザーのハッシュ化されたパスワードを取得する
+    
+    args:
+        id (str): ユーザーID
+    returns:
+        str: ハッシュ化されたパスワード
+    """
     if check(id):
         # ユーザーのタスクファイルを読み込み
         tasks_file_path = USERS_DIR + id + '.json'
