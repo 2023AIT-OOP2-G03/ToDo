@@ -4,6 +4,18 @@ import userManager
 
 # 認証
 def login(id, pw):
+    """ログイン機能
+    
+    ログインの成功・失敗を判定する。
+    失敗時はエラーメッセージを返す
+    
+    Args:
+        id (str): ユーザーID
+        pw (str): パスワード
+    Returns:
+        bool: True(ログイン成功時)
+        str: エラーメッセージ(ログイン失敗時)
+    """
     # ユーザーの存在を確認
     if userManager.check(id):
         # パスワードの確認
