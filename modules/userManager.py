@@ -16,7 +16,7 @@ def create(id, pw):
         int: 0(ユーザー作成失敗時)
     """
     if check(id):
-        return "ユーザーが存在します"
+        return "既にユーザーが存在します"
     else:
         # ユーザーを作成
         # パスワードをハッシュ化
@@ -30,10 +30,8 @@ def create(id, pw):
         # ユーザーのタスクファイルを作成
         tasks_file_path = USERS_DIR + id + '.json'
         json.dump(user, open(tasks_file_path, 'w'), indent = 4)
-        
-        # TODO: なぜか「0」を返している、main.pyを編集してTrueにすべき
-        # return True
-        return 0
+
+        return True
 
 # ユーザーの存在を確認
 def check(id):

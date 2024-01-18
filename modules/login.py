@@ -1,6 +1,5 @@
 import json
-
-import userManager
+from modules import userManager
 
 # 認証
 def login(id, pw):

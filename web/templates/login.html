@@ -80,20 +80,24 @@
 </head>
 <body>
     <div class="login-container">
-    <h2>ログイン</h2>
-    <form action="/registration" method="post">
+    {% if message %}
+        <h2>{{ message }}</h2>
+    {% else %}
+        <h2>ログイン</h2>
+    {% endif %}
+    <form action="/" method="post">
         <div class="form-group">
         <label for="username">Username:</label>
-        <input type="text" name="user" placeholder="名前">
+        <input type="text" name="user" placeholder="名前" required>
         </div>
         <div class="form-group">
         <label for="password">Password:</label>
-        <input type="password" name="pw" placeholder="パスワード">
+        <input type="password" name="pw" placeholder="パスワード" required>
         </div>
         <button type="submit" class="login-button">ログイン</button>
         <br>
         <p></p>
-        <button type="button" class="newcreate-button"><a href="./creat.html">新規作成</a></button>
+        <button type="button" class="newcreate-button"><a href="/registration">新規作成</a></button>
     </form>
     </div>
 </body>
