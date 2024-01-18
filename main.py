@@ -1,9 +1,9 @@
 from flask import Flask, render_template, request, jsonify
 from modules import login, userManager
+from modules.todo import todolistManager, taskManager
 import random
 
 app = Flask(__name__, static_folder='web/static', template_folder='web/templates')
-app = Flask(__name__)
 
 #登録ページ
 @app.route('/registration', methods=["GET"])
@@ -47,7 +47,6 @@ def add_todo():
     task_name = request.form.get('task_name', None)
     task = request.form.get('task', None)
     task_date = request.form.get('task_date', None)
-    task_id = str(int(random.random()*10000))
 
     data = "{""}"
     return jsonify(data)

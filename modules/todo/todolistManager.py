@@ -1,4 +1,5 @@
-import taskManager
+if __name__ == '__main__': import taskManager
+else: from modules.todo import taskManager
 import uuid
 import json
 
