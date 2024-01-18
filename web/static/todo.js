@@ -37,6 +37,11 @@ function addTask() {
             console.log('サーバーからの応答:', data);
 
             createTaskListItem(data)
+
+            // 入力欄を空にする
+            taskInput.value = '';
+            taskContent.value = '';
+            taskDeadline.value = '';
         })
         .catch(error => {
             console.error('エラー:', error);

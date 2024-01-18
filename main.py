@@ -65,5 +65,19 @@ def delete_todo():
 
     return jsonify(todo_data)
 
+
+#管理者ページ
+@app.route('/admin', methods=["GET"])
+def admin(message=None):
+    return render_template("admin.html", message=message)
+
+@app.route('/admin', methods=["POST"])
+def delete_user(message=None):
+    username = request.form.get('user', None)
+    if (userManager.check(username)):
+        userManager.delete(username)
+        return admin(message="削除完了しました")
+    return admin(message="ユーザーが存在しません")
+
 if __name__ == '__main__':
     app.run(debug=True)
