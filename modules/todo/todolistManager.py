@@ -1,6 +1,7 @@
 import taskManager
 import uuid
 import json
+import datetime
 
 USERS_DIR = './data/users/'
 
@@ -84,13 +85,13 @@ def check_task(userid, taskid):
         return False
 
 if __name__ == '__main__':
-    # add_task("test", taskManager.task("test", "test", taskManager.task_status.NOT_READY))
+    # add_task("test", taskManager.task("test1", "test1", taskManager.task_status.NOT_READY, datetime.datetime.now()))
     
     tasks = get_tasks("test")
     for i in tasks:
         print(i)
         print(tasks[i])
-        delete_task("test", i)
+        # delete_task("test", i)
     
     print(get_tasks("test"))
     
