@@ -3,6 +3,7 @@ else: from modules.todo import taskManager
 from datetime import datetime as dt
 import uuid
 import json
+import datetime
 
 USERS_DIR = './data/users/'
 
@@ -86,8 +87,7 @@ def check_task(userid, taskid):
         return False
 
 if __name__ == '__main__':
-    task_date = dt.strptime("[2024-1-9]", "[%Y-%m-%d]")
-    add_task("test", taskManager.task("iti", "naiyou", taskManager.task_status.NOT_READY, task_date))
+    # add_task("test", taskManager.task("test1", "test1", taskManager.task_status.NOT_READY, datetime.datetime.now()))
     
     tasks = get_tasks("test")
     for i in tasks:

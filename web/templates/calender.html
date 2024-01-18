@@ -5,9 +5,7 @@
     <meta charset="UTF-8">
     <title>基本的なカレンダー</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        /* CSSスタイルはこちらで設定 */
-    </style>
+    <link rel="stylesheet" href="../static/calendar.css">
 </head>
 
 <body>
@@ -47,7 +45,9 @@
                         calendarHtml += '<td></td>';
                     }
                 }
-                calendarHtml += `<td>${i}</td>`;
+                let cellId = `${year}${(month + 1).toString().padStart(2, '0')}${i.toString().padStart(2, '0')}`;
+                // console.log(cellId);
+                calendarHtml += `<td>${i}<div id="${cellId}"></div></td>`;
                 if (dayOfWeek === 6) {
                     calendarHtml += '</tr>';
                     if (i < daysInMonth) {
