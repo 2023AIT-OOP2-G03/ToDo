@@ -102,4 +102,4 @@ class task:
             "description": self.description,
             "status": self.status,
             "timeLimit": self.timeLimit.strftime("%Y/%m/%d %H:%M:%S")
-        } 
+        }
