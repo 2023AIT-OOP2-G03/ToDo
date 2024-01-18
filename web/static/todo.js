@@ -18,6 +18,7 @@
 //         console.log(datas.name)
 //         console.log(datas.description)
 //         console.log(datas.status)
+//         console.log(datas.timeLimit)
 //     }
 // })
 // .catch(error => {

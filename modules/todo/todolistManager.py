@@ -88,7 +88,7 @@ def check_task(userid, taskid):
 
 if __name__ == '__main__':
     task_date = dt.strptime("[2024-1-9]", "[%Y-%m-%d]")
-    add_task("test", taskManager.task("nni", "you win", taskManager.task_status.NOT_READY, task_date))
+    add_task("test", taskManager.task("ni", "nikome", taskManager.task_status.NOT_READY, task_date))
     
     tasks = get_tasks("test")
     for i in tasks:
