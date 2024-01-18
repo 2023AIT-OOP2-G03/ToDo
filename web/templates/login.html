@@ -80,10 +80,9 @@
 </head>
 <body>
     <div class="login-container">
-    {% if message %}
-        <h2>{{ message }}</h2>
-    {% else %}
         <h2>ログイン</h2>
+    {% if message %}
+        <div style="color: red;">{{ message }}</div>
     {% endif %}
     <form action="/" method="post">
         <div class="form-group">
