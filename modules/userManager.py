@@ -54,6 +54,13 @@ def check(id):
         return False
     
 def get_digest(pw):
+    """文字列をハッシュ化する
+    
+    args:
+        pw (str): ハッシュ化したい文字列
+    returns:
+        str: ハッシュ化された文字列
+    """
     # SHA256でハッシュ化
     hashed_pw = hashlib.sha256(pw.encode("utf-8")).hexdigest()
     return hashed_pw
