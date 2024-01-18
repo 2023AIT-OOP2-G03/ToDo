@@ -1,3 +1,20 @@
+const formdata = new FormData()
+fn = document.querySelector('#user').textContent
+formdata.append("user", fn)
+console.log(fn)
+
+fetch("/todo", {
+    method: "POST",
+    body: formdata
+}).then(response => response.json())
+.then(data => {
+    // サーバーからの応答を処理
+    console.log(typeof(data))
+})
+.catch(error => {
+    console.error('エラー:', error);
+});
+
 function addTask() {
     var taskInput = document.getElementById('taskInput');
     var taskContent = document.getElementById('taskContent');

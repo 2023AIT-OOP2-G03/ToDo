@@ -3,10 +3,10 @@ import json
 import datetime
 
 class task_status(str, Enum):
-    NOT_READY = "not ready"
-    READY = "ready"
-    DOING = "doing"
-    DONE = "done"
+    NOT_READY = "not ready" # 未着手
+    READY = "ready" # 着手可能
+    DOING = "doing" # 着手中
+    DONE = "done" # 完了
 
 class task:
     def __init__(self, name = "", description = "", status = task_status.NOT_READY, timeLimit = datetime.datetime.now()):
