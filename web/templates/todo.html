@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Todo List</title>
+
+    <!-- new.css -->
+    <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
+
+    <!-- メッセージ表示用のCSSを定義 -->
+    <style>
+        #message-container,
+        #error-container {
+            padding: 1rem;
+            border: 1px solid #e9ecef;
+            border-left-width: 0.25rem;
+            border-left-color: #5bc0de;
+            border-radius: 0.25rem;
+        }
+
+        #error-container {
+            color: #dc3545;
+        }
+    </style>
+
+    <script defer src="{{ url_for('static', filename='todo.js') }}"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Todo List</h1>
+    </header>
+    <main>
+        <section>
+            <form id="taskForm">
+                <label for="taskInput">タスク名：</label>
+                <input type="text" id="taskInput" placeholder="タスクを入力してください">
+        
+                <label for="taskContent">タスク内容：</label>
+                <textarea id="taskContent" placeholder="タスクの詳細"></textarea>
+        
+                <label for="taskDeadline">期限：</label>
+                <input type="date" id="taskDeadline">
+        
+                <button type="button" onclick="addTask()">タスクを追加</button>
+            </form>
+            <ul id="taskList">
+                <h2>現在のタスク</h2>
+                <!-- タスク表示 -->
+            </ul>
+        </section>
+    </main>
+</body>
+
+</html>

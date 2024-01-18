@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>基本的なカレンダー</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* CSSスタイルはこちらで設定 */
+    </style>
+</head>
+
+<body>
+
+    <h1>Calender</h1>
+
+    <button id="prevMonth" onclick="prevClick()">前の月</button>
+    <button id="nextMonth" onclick="nextClick()">次の月</button>
+
+    <div id="currentDisplayedYYYYMM"></div>
+
+    <div id="calendar"></div>
+
+    <script>
+        let calendarEl = document.getElementById('calendar');
+        const date = new Date();
+        const currentYear = date.getFullYear();
+        const currentMonth = date.getMonth();
+
+        let currentDisplayedMonth = currentMonth;
+        let currentDisplayedYear = currentYear;
+
+        // カレンダーの表示を更新する関数
+        function updateCalendar(year, month) {
+            let daysInMonth = new Date(year, month + 1, 0).getDate();
+            let calendarHtml = '<table><thead><tr>';
+            for (let i = 0; i < 7; i++) {
+                calendarHtml += `<th>${['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][i]}</th>`;
+            }
+            calendarHtml += '</tr></thead><tbody><tr>';
+
+            for (let i = 1; i <= daysInMonth; i++) {
+                const dayOfWeek = new Date(year, month, i).getDay();
+                if (i === 1) {
+                    calendarHtml += '<tr>';
+                    for (let j = 0; j < dayOfWeek; j++) {
+                        calendarHtml += '<td></td>';
+                    }
+                }
+                calendarHtml += `<td>${i}</td>`;
+                if (dayOfWeek === 6) {
+                    calendarHtml += '</tr>';
+                    if (i < daysInMonth) {
+                        calendarHtml += '<tr>';
+                    }
+                } else if (i === daysInMonth) {
+                    for (let j = dayOfWeek + 1; j <= 6; j++) {
+                        calendarHtml += '<td></td>';
+                    }
+                    calendarHtml += '</tr>';
+                }
+            }
+            calendarHtml += '</tbody></table>';
+            calendarEl.innerHTML = calendarHtml;
+        }
+
+        // 表示年月を更新する関数
+        function updateDisplayedYYYYMM(year, month) {
+            document.getElementById('currentDisplayedYYYYMM').innerHTML = `${year}年${month + 1}月`;
+        }
+
+        // 前の月ボタンを押したときの処理
+        function prevClick() {
+            currentDisplayedMonth--;
+            if (currentDisplayedMonth < 0) {
+                currentDisplayedMonth = 11;
+                currentDisplayedYear--;
+            }
+            updateCalendar(currentDisplayedYear, currentDisplayedMonth);
+            updateDisplayedYYYYMM(currentDisplayedYear, currentDisplayedMonth);
+        }
+
+        // 次の月ボタンを押したときの処理
+        function nextClick() {
+            currentDisplayedMonth++;
+            if (currentDisplayedMonth > 11) {
+                currentDisplayedMonth = 0;
+                currentDisplayedYear++;
+            }
+            updateCalendar(currentDisplayedYear, currentDisplayedMonth);
+            updateDisplayedYYYYMM(currentDisplayedYear, currentDisplayedMonth);
+        }
+
+        // 初期表示
+        window.onload = function() {
+            updateCalendar(currentDisplayedYear, currentDisplayedMonth);
+            updateDisplayedYYYYMM(currentDisplayedYear, currentDisplayedMonth);
+        };
+
+    </script>
+</body>
+
+</html>
