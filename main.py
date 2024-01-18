@@ -1,6 +1,6 @@
-from flask import Flask, render_template, request,jsonify
+from flask import Flask, render_template, request, jsonify
 from modules import login, userManager
-import json
+import random
 
 app = Flask(__name__, static_folder='web/static', template_folder='web/templates')
 app = Flask(__name__)
@@ -9,7 +9,6 @@ app = Flask(__name__)
 @app.route('/registration', methods=["GET"])
 def registration_show(message=None):
     return render_template("create.html", message=message)
-#登録ページ
 @app.route('/registration', methods=["POST"])
 def registration():
     username = request.form.get('user', None)
@@ -32,37 +31,33 @@ def login_():
 
     result = login.login(username, password)
 
-    if (result==True): return render_template("todo.html")
+    if (result==True): return render_template("todo.html", message=username)
     else: return index(message=result)
 
-@app.route('/')
-def index():
-    return render_template('todo.html')
+#ToDoListページ
+@app.route('/todo', methods=["POST"])
+def get_todo():
+    username = request.form.get('user', None)
 
-# タスクの追加時 POST でタスク名、タスク内容、期限を送信する。
-@app.route('/add_task', methods=["POST"])
-def add_task():
-    # リクエストデータをJSON形式で受け取る
-    task_data = request.get_json()
-    print(task_data)
+    data = "{""}"
+    return jsonify(data)
+@app.route('/add', methods=["POST"])
+def add_todo():
+    username = request.form.get('user', None)
+    task_name = request.form.get('task_name', None)
+    task = request.form.get('task', None)
+    task_date = request.form.get('task_date', None)
+    task_id = str(int(random.random()*10000))
 
-    with open('todo.json', 'r') as f:
-        json_data = json.load(f)
+    data = "{""}"
+    return jsonify(data)
+@app.route('/delete', methods=["POST"])
+def delete_todo():
+    username = request.form.get('user', None)
+    task_id = request.form.get('task_id', None)
 
-    new_task = {
-        "taskId": len(json_data) + 1,  # 新しいタスクIDを生成
-        "taskName": task_data["taskName"],
-        "taskContent": task_data["taskContent"],
-        "taskDeadline": task_data["taskDeadline"]
-    }
-
-    json_data.append(new_task)
-
-    with open('todo.json', 'w') as f:
-        json.dump(json_data, f, indent=2)
-
-    return jsonify(new_task)
-
+    data = "{""}"
+    return jsonify(data)
 
 if __name__ == '__main__':
     app.run(debug=True)
