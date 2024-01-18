@@ -47,6 +47,7 @@ def add_todo():
     task_name = request.form.get('task_name', None)
     task = request.form.get('task', None)
     task_date = request.form.get('task_date', None)
+    task_data = todolistManager.add_task(username, taskManager.task(task_name, task, taskManager.task_status.NOT_READY))
 
     data = "{""}"
     return jsonify(data)
