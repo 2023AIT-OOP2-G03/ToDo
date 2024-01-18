@@ -47,7 +47,7 @@
                 }
                 let cellId = `${year}${(month + 1).toString().padStart(2, '0')}${i.toString().padStart(2, '0')}`;
                 // console.log(cellId);
-                calendarHtml += `<td>${i}<div id="${cellId}"></div></td>`;
+                calendarHtml += `<td>${i}<div id="${cellId}" class="taskTitleCell"></div></td>`;
                 if (dayOfWeek === 6) {
                     calendarHtml += '</tr>';
                     if (i < daysInMonth) {

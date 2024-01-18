@@ -1,9 +1,15 @@
-.td {
+td {
     text-align: center;
+    width: 14%;
 }
 
-.table {
-    width: 4em;
+table {
+    width: 70%;
     max-width: 100%;
     margin-bottom: 20px;
+}
+
+table, table th, table td {
+    border-collapse: collapse;
+    border:1px solid black;
 }

@@ -38,7 +38,7 @@
     <header>
         <h1>Todo List</h1>
         {% if message %}
-        <div id="username"><h2>ユーザID:</h2><h2 id="user">{{ message }}</h2></div>
+        <h2>ユーザID:</h2><h2 id="username">{{ message }}</h2>
         {% endif %}
     </header>
     <main>
@@ -46,21 +46,27 @@
             <form id="taskForm">
                 <label for="taskInput">タスク名：</label>
                 <input type="text" id="taskInput" placeholder="タスクを入力してください">
-        
+                <br>
+
                 <label for="taskContent">タスク内容：</label>
                 <textarea id="taskContent" placeholder="タスクの詳細"></textarea>
-        
+                <br>
+
                 <label for="taskDeadline">期限：</label>
                 <input type="date" id="taskDeadline">
-        
+                <br>
+
                 <button type="button" onclick="addTask()">タスクを追加</button>
+
             </form>
             <ul id="taskList">
                 <h2>現在のタスク</h2>
                 <!-- タスク表示 -->
             </ul>
         </section>
+
     </main>
+
 </body>
 
 </html>

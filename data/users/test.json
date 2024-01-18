@@ -1,17 +1,4 @@
 {
     "pw": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
-    "tasks": {
-        "c2e7ded3-dade-477e-b504-c0b9dffce33d": {
-            "name": "iti",
-            "description": "ikkome",
-            "status": "not ready",
-            "timeLimit": "2024/01/09 00:00:00"
-        },
-        "f453bfa9-3dee-4913-a832-518d75b12c84": {
-            "name": "ni",
-            "description": "",
-            "status": "not ready",
-            "timeLimit": "2024/01/09 00:00:00"
-        }
-    }
+    "tasks": {}
 }

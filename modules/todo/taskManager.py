@@ -3,7 +3,7 @@ import json
 import datetime
 
 class task_status(str, Enum):
-    NOT_READY = "not ready" # 未着手
+    NOT_READY = "not ready" # 着手不可能
     READY = "ready" # 着手可能
     DOING = "doing" # 着手中
     DONE = "done" # 完了
