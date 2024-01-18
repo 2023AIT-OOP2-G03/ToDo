@@ -69,9 +69,18 @@ def delete_todo():
 #管理者ページ
 @app.route('/admin', methods=["GET"])
 def admin(message=None):
-    return render_template("admin.html", message=message)
+    return render_template("index.html", message=message, admin=True)
 
 @app.route('/admin', methods=["POST"])
+def delete_user(message=None):
+    username = request.form.get('user', None)
+    password = request.form.get('pw', None)
+    # if (userManager.check(username)):
+    #     userManager.delete(username)
+    #     return admin(message="削除完了しました")
+    return render_template("admin.html")
+
+@app.route('/del-admin', methods=["POST"])
 def delete_user(message=None):
     username = request.form.get('user', None)
     if (userManager.check(username)):

@@ -84,7 +84,12 @@
     {% if message %}
         <div style="color: red;">{{ message }}</div>
     {% endif %}
-    <form action="/" method="post">
+
+    {% if admin %}
+    <form action="/admin" method="post">
+    {% else %}
+    <form action="/" method="post"></form>
+    {% endif %}
         <div class="form-group">
         <label for="username">Username:</label>
         <input type="text" name="user" placeholder="名前" required>
