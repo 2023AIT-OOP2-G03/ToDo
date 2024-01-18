@@ -3,6 +3,7 @@ from modules import login, userManager
 import random
 
 app = Flask(__name__, static_folder='web/static', template_folder='web/templates')
+app = Flask(__name__)
 
 #登録ページ
 @app.route('/registration', methods=["GET"])

@@ -1,95 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="static/todo.css"> -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='todo.css') }}">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Todo List</title>
+
+    <!-- new.css -->
+    <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
+
+    <!-- メッセージ表示用のCSSを定義 -->
     <style>
-/* Add your styling here */
-#app {
-    max-width: 600px;
-    margin: 0 auto;
-    font-family: Arial, sans-serif;
-}
+        #message-container,
+        #error-container {
+            padding: 1rem;
+            border: 1px solid #e9ecef;
+            border-left-width: 0.25rem;
+            border-left-color: #5bc0de;
+            border-radius: 0.25rem;
+        }
 
-#taskList {
-    list-style: none;
-    padding: 0;
-}
+        #error-container {
+            color: #dc3545;
+        }
+    </style>
 
-.taskItem {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid #ddd;
-    margin: 5px 0;
-    padding: 10px;
-}
-
-.deleteButton {
-    cursor: pointer;
-    background-color: #ff4d4d;
-    color: #fff;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-}
-
-        </style>
+    <script defer src="{{ url_for('static', filename='todo.js') }}"></script>
 </head>
+
 <body>
-
-<div id="app">
-    <h1>Todo-List</h1>
-    {% if message %}
-    <h2>ユーザID:</h2><h2 id="username">{{ message }}</h2>
-    {% endif %}
-    <form id="taskForm">
-        <input type="text" id="taskInput" placeholder="Enter task">
-        <button type="button" onclick="addTask()">Add Task</button>
-    </form>
-    <ul id="taskList">
-        <h2>Current Tasks</h2>
-        <!-- Task items will be added dynamically here -->
-    </ul>
-</div>
-
-<script>
-    console.log(document.querySelector('#username').textContent)
-function addTask() {
-    var taskInput = document.getElementById('taskInput');
-    var taskList = document.getElementById('taskList');
-
-    if (taskInput.value.trim() !== '') {
-        // Create a new list item
-        var listItem = document.createElement('li');
-        listItem.className = 'taskItem';
-
-        // Create a span for the task text
-        var taskText = document.createElement('span');
-        taskText.textContent = taskInput.value;
-        listItem.appendChild(taskText);
-
-        // Create a button for deleting the task
-        var deleteButton = document.createElement('button');
-        deleteButton.textContent = 'Delete';
-        deleteButton.className = 'deleteButton';
-        deleteButton.addEventListener('click', function () {
-            taskList.removeChild(listItem);
-        });
-        listItem.appendChild(deleteButton);
-
-        // Add the list item to the task list
-        taskList.appendChild(listItem);
-
-        // Clear the input field
-        taskInput.value = '';
-    }
-}
-</script>
-
+    <header>
+        <h1>Todo List</h1>
+    </header>
+    <main>
+        <section>
+            <form id="taskForm">
+                <label for="taskInput">タスク名：</label>
+                <input type="text" id="taskInput" placeholder="タスクを入力してください">
+        
+                <label for="taskContent">タスク内容：</label>
+                <textarea id="taskContent" placeholder="タスクの詳細"></textarea>
+        
+                <label for="taskDeadline">期限：</label>
+                <input type="date" id="taskDeadline">
+        
+                <button type="button" onclick="addTask()">タスクを追加</button>
+            </form>
+            <ul id="taskList">
+                <h2>現在のタスク</h2>
+                <!-- タスク表示 -->
+            </ul>
+        </section>
+    </main>
 </body>
-</html>
 
+</html>
