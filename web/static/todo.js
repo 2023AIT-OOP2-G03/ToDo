@@ -1,7 +1,7 @@
-const formdata = new FormData()
-user = document.querySelector('#username').textContent
+let user = document.querySelector('#username').textContent
+let tasklist = document.querySelector('#taskList')
+let formdata = new FormData()
 formdata.append("user", user)
-tasklist = document.querySelector('#taskList')
 
 fetch("/todo", {
     method: "POST",
@@ -10,22 +10,18 @@ fetch("/todo", {
 .then(data => {
     // サーバーからの応答を処理
     createTaskListItem(data)
-    createTaskListItem(data)
 })
 .catch(error => {
     console.error('エラー:', error);
 });
 
 function addTask() {
-    var taskInput = document.getElementById('taskInput'); //タスクの名前
-    var taskContent = document.getElementById('taskContent');  //タスクの内容
-    var taskDeadline = document.getElementById('taskDeadline'); //タスクの期限
+    taskInput = document.getElementById('taskInput'); //タスクの名前
+    taskContent = document.getElementById('taskContent');  //タスクの内容
+    taskDeadline = document.getElementById('taskDeadline'); //タスクの期限
 
-    console.log(taskContent.value)
-    
     if (taskInput.value.trim() !== '' && taskDeadline.value !== '') {
-        
-        const formdata = new FormData()
+        formdata = new FormData()
         formdata.append("user", user) //ユーザーネーム
         formdata.append("task_name", taskInput.value) //タスクの名前
         formdata.append("task", taskContent.value) //タスクの内容
@@ -48,8 +44,8 @@ function addTask() {
     }
 }
 
-function delTask(taskID) {        
-    const formdata = new FormData()
+function delTask(taskID) {
+    formdata = new FormData()
     formdata.append("user", user) //ユーザーネーム
     formdata.append("task_id", taskID) //タスクのID
 
@@ -84,25 +80,25 @@ function createTaskListItem(data) {
         // console.log(datas.description)
         // console.log(datas.status)
         // console.log(datas.timeLimit)
-        var listItem = document.createElement('li');
+        listItem = document.createElement('li');
         listItem.className = 'taskItem';
          // タスク名
-        var taskText = document.createElement('span');
+        taskText = document.createElement('span');
         taskText.textContent = datas.name;
         listItem.appendChild(taskText);
 
         // タスク内容
-        var contentText = document.createElement('span');
+        contentText = document.createElement('span');
         contentText.textContent = datas.description;
         listItem.appendChild(contentText);
 
         // 期限
-        var deadlineText = document.createElement('span');
+        deadlineText = document.createElement('span');
         deadlineText.textContent = datas.timeLimit;
         listItem.appendChild(deadlineText);
 
         // 削除ボタン
-        var deleteButton = document.createElement('button');
+        deleteButton = document.createElement('button');
         deleteButton.textContent = '削除';
         deleteButton.className = 'deleteButton';
         deleteButton.setAttribute('onclick', 'delTask("' + keys[i] + '")')
