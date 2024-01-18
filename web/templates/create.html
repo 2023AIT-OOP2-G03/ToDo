@@ -80,9 +80,9 @@
 <body>
   <div class="login-container">
     {% if message %}
-      <h2>{{ message }}</h2>
+    <h2>{{ message }}</h2>
     {% else %}
-      <h2>アカウントを作成しましょう</h2>
+    <h2>アカウントを作成しましょう</h2>
     {% endif %}
     <form action="/registration" method="post">
       <div class="form-group">
@@ -94,8 +94,9 @@
         <input type="password" id="password" name="pw" required>
       </div>
 
-      <button type="submit" class="newcreate-button">新規作成</button>
+      <button type="submit" class="newcreate-button" onclick="location.href='login.html'">新規作成</button>
     </form>
   </div>
 </body>
+
 </html>

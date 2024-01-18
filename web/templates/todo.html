@@ -24,6 +24,11 @@
         #error-container {
             color: #dc3545;
         }
+
+        #username {
+            display: flex;
+            justify-content: flex-end;
+        }
     </style>
 
     <script defer src="{{ url_for('static', filename='todo.js') }}"></script>
@@ -41,21 +46,27 @@
             <form id="taskForm">
                 <label for="taskInput">タスク名：</label>
                 <input type="text" id="taskInput" placeholder="タスクを入力してください">
-        
-                <label for="taskContent">タスク内容：</label>
-                <textarea id="taskContent" placeholder="タスクの詳細"></textarea>
-        
+                <br>
+
+                <label for="taskContent" class="taskContent" display="flex">タスク内容：</label>
+                <textarea class="taskContent" placeholder="タスクの詳細"></textarea>
+                <br>
+
                 <label for="taskDeadline">期限：</label>
                 <input type="date" id="taskDeadline">
-        
+                <br>
+
                 <button type="button" onclick="addTask()">タスクを追加</button>
+
             </form>
             <ul id="taskList">
                 <h2>現在のタスク</h2>
                 <!-- タスク表示 -->
             </ul>
         </section>
+
     </main>
+
 </body>
 
 </html>

@@ -1,3 +1,32 @@
+//--------------------正木のデバッグ用--------------------
+// const formdata = new FormData()
+// fn = document.querySelector('#user').textContent
+// formdata.append("user", fn)
+// console.log(fn)
+
+// fetch("/todo", {
+//     method: "POST",
+//     body: formdata
+// }).then(response => response.json())
+// .then(data => {
+//     // サーバーからの応答を処理
+//     keys = Object.keys(data)
+//     for (i = 0; i < keys.length; i++) {
+//         datas = Object.values(data)[i]
+//         console.log("--------------------")
+//         console.log("key : " + keys[i])
+//         console.log(datas.name)
+//         console.log(datas.description)
+//         console.log(datas.status)
+//         console.log(datas.timeLimit)
+//     }
+// })
+// .catch(error => {
+//     console.error('エラー:', error);
+// });
+//--------------------確認ように残しといて--------------------
+
+
 function addTask() {
     var user = document.querySelector('#username').textContent; //ユーザーネーム
     var taskInput = document.getElementById('taskInput'); //タスクの名前
