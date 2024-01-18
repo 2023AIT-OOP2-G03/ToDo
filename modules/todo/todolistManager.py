@@ -1,4 +1,6 @@
-import taskManager
+if __name__ == '__main__': import taskManager
+else: from modules.todo import taskManager
+from datetime import datetime as dt
 import uuid
 import json
 import datetime
@@ -93,6 +95,5 @@ if __name__ == '__main__':
         print(tasks[i])
         # delete_task("test", i)
     
-    print(get_tasks("test"))
-    
+    print(type(tasks))
     pass

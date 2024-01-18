@@ -24,6 +24,11 @@
         #error-container {
             color: #dc3545;
         }
+
+        #username {
+            display: flex;
+            justify-content: flex-end;
+        }
     </style>
 
     <script defer src="{{ url_for('static', filename='todo.js') }}"></script>
@@ -32,6 +37,9 @@
 <body>
     <header>
         <h1>Todo List</h1>
+        {% if message %}
+        <div id="username"><h2>ユーザID:</h2><h2 id="user">{{ message }}</h2></div>
+        {% endif %}
     </header>
     <main>
         <section>
