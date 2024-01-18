@@ -34,30 +34,30 @@ def login_():
     if (result==True): return render_template("todo.html", message=username)
     else: return index(message=result)
 
-#ToDoListページ
-@app.route('/todo', methods=["POST"])
-def get_todo():
-    username = request.form.get('user', None)
+# #ToDoListページ
+# @app.route('/todo', methods=["POST"])
+# def get_todo():
+#     username = request.form.get('user', None)
 
-    data = "{""}"
-    return jsonify(data)
-@app.route('/add', methods=["POST"])
-def add_todo():
-    username = request.form.get('user', None)
-    task_name = request.form.get('task_name', None)
-    task = request.form.get('task', None)
-    task_date = request.form.get('task_date', None)
-    task_id = str(int(random.random()*10000))
+#     data = "{""}"
+#     return jsonify(data)
+# @app.route('/add', methods=["POST"])
+# def add_todo():
+#     username = request.form.get('user', None)
+#     task_name = request.form.get('task_name', None)
+#     task = request.form.get('task', None)
+#     task_date = request.form.get('task_date', None)
+#     task_id = str(int(random.random()*10000))
 
-    data = "{""}"
-    return jsonify(data)
-@app.route('/delete', methods=["POST"])
-def delete_todo():
-    username = request.form.get('user', None)
-    task_id = request.form.get('task_id', None)
+#     data = "{""}"
+#     return jsonify(data)
+# @app.route('/delete', methods=["POST"])
+# def delete_todo():
+#     username = request.form.get('user', None)
+#     task_id = request.form.get('task_id', None)
 
-    data = "{""}"
-    return jsonify(data)
+#     data = "{""}"
+#     return jsonify(data)
 
 if __name__ == '__main__':
     app.run(debug=True)
