@@ -1,0 +1,9 @@
+.td {
+    text-align: center;
+}
+
+.table {
+    width: 4em;
+    max-width: 100%;
+    margin-bottom: 20px;
+}
