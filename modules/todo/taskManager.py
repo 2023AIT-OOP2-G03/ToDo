@@ -100,5 +100,6 @@ class task:
         return {
             "name": self.name,
             "description": self.description,
-            "status": self.status
+            "status": self.status,
+            "timeLimit": self.timeLimit.strftime("%Y/%m/%d %H:%M:%S")
         } 
