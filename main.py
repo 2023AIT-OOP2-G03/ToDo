@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, jsonify
 from modules import login, userManager
 from modules.todo import todolistManager, taskManager
 from datetime import datetime as dt
-import json
 
 app = Flask(__name__, static_folder='web/static', template_folder='web/templates')
 
@@ -18,7 +17,7 @@ def registration():
     password = request.form.get('pw', None)
     result = userManager.create(username, password)
     if (result==True):
-        return render_template("login.html", message="登録完了しました")
+        return index("登録完了しました")
     else:
         return registration_show(result)
 
@@ -33,9 +32,7 @@ def login_():
     username = request.form.get('user', None)
     password = request.form.get('pw', None)
     if (username==None and password==None): return index()
-
     result = login.login(username, password)
-
     if (result==True): return render_template("todo.html", message=username)
     else: return index(message=result)
 
@@ -53,8 +50,8 @@ def add_todo():
     username = request.form.get('user', None)
     task_name = request.form.get('task_name', None)
     task = request.form.get('task', None)
-    task_date = dt.strptime(request.form.get('task_date', None), "[%Y-%m-%d %H:%M]")
-    todolistManager.add_task(username, taskManager.task(task_name, task, taskManager.task_status.NOT_READY, task_date))
+    task_date = request.form.get('task_date', None)
+    todolistManager.add_task(username, taskManager.task(task_name, task, taskManager.task_status.NOT_READY, dt.strptime(task_date, "%Y-%m-%d")))
     todo_data = todolistManager.get_tasks(username)
 
     return jsonify(todo_data)
@@ -67,6 +64,27 @@ def delete_todo():
     todo_data = todolistManager.get_tasks(username)
 
     return jsonify(todo_data)
+
+
+#管理者ページ
+@app.route('/admin', methods=["GET"])
+def admin(message=None):
+    return render_template("login.html", message=message, admin=True)
+
+@app.route('/admin', methods=["POST"])
+def login_admin(message=None):
+    username = request.form.get('user', None)
+    password = request.form.get('pw', None)
+    if (username=="admin" and password=="admin"): return render_template("admin.html")
+    return admin(message="ログインエラー")
+
+@app.route('/del-admin', methods=["POST"])
+def delete_user():
+    username = request.form.get('user', None)
+    if (userManager.check(username)):
+        userManager.delete(username)
+        return render_template("admin.html", message="削除完了しました")
+    return render_template("admin.html", message="ユーザーが存在しません")
 
 if __name__ == '__main__':
     app.run(debug=True)
