@@ -1,5 +1,6 @@
 if __name__ == '__main__': import taskManager
 else: from modules.todo import taskManager
+from datetime import datetime as dt
 import uuid
 import json
 
@@ -85,14 +86,14 @@ def check_task(userid, taskid):
         return False
 
 if __name__ == '__main__':
-    # add_task("test", taskManager.task("test", "test", taskManager.task_status.NOT_READY))
+    task_date = dt.strptime("[2024-1-9]", "[%Y-%m-%d]")
+    add_task("test", taskManager.task("iti", "naiyou", taskManager.task_status.NOT_READY, task_date))
     
     tasks = get_tasks("test")
     for i in tasks:
         print(i)
         print(tasks[i])
-        delete_task("test", i)
+        # delete_task("test", i)
     
-    print(get_tasks("test"))
-    
+    print(type(tasks))
     pass

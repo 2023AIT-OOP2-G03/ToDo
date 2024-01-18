@@ -1,4 +1,10 @@
 {
     "pw": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
-    "tasks": {}
+    "tasks": {
+        "6e06cd2d-a6e7-470d-9925-490249eb22b6": {
+            "name": "iti",
+            "description": "naiyou",
+            "status": "not ready"
+        }
+    }
 }

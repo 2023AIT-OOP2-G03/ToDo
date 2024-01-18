@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify
 from modules import login, userManager
 from modules.todo import todolistManager, taskManager
 from datetime import datetime as dt
+import json
 
 app = Flask(__name__, static_folder='web/static', template_folder='web/templates')
 
