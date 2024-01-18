@@ -1,22 +1,23 @@
 function addTask() {
-    var taskInput = document.getElementById('taskInput');
-    var taskContent = document.getElementById('taskContent');
-    var taskDeadline = document.getElementById('taskDeadline');
-
+    var user = document.querySelector('#username').textContent; //ユーザーネーム
+    var taskInput = document.getElementById('taskInput'); //タスクの名前
+    var taskContent = document.getElementById('taskContent');  //タスクの内容
+    var taskDeadline = document.getElementById('taskDeadline'); //タスクの期限
+    
     if (taskInput.value.trim() !== '' && taskDeadline.value !== '') {
-        // タスクオブジェクトを作成
-        var taskData = {
-            taskName: taskInput.value,
-            taskContent: taskContent.value,
-            taskDeadline: taskDeadline.value
-        };
+        
+        const formdata = new FormData()
+        formdata.append("user", user) //ユーザーネーム
+        formdata.append("task_name", taskInput.value) //タスクの名前
+        formdata.append("task", taskContent.value) //タスクの内容
+        formdata.append("task_date", taskDeadline.value) //タスクの期限
+        console.log(user)
 
         // タスクの追加をサーバーに送信
         fetch('/add_task', {
-            
-            body: JSON.stringify(taskData),
-        })
-        .then(response => response.json())
+            method: "POST",
+            body: formdata
+        }).then(response => response.json())
         .then(data => {
             // サーバーからの応答を処理
             console.log('サーバーからの応答:', data);
