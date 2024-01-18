@@ -17,7 +17,7 @@ def registration():
     password = request.form.get('pw', None)
     result = userManager.create(username, password)
     if (result==True):
-        return render_template("login.html", message="登録完了しました")
+        return index("登録完了しました")
     else:
         return registration_show(result)
 
@@ -69,24 +69,22 @@ def delete_todo():
 #管理者ページ
 @app.route('/admin', methods=["GET"])
 def admin(message=None):
-    return render_template("index.html", message=message, admin=True)
+    return render_template("login.html", message=message, admin=True)
 
 @app.route('/admin', methods=["POST"])
-def delete_user(message=None):
+def login_admin(message=None):
     username = request.form.get('user', None)
     password = request.form.get('pw', None)
-    # if (userManager.check(username)):
-    #     userManager.delete(username)
-    #     return admin(message="削除完了しました")
-    return render_template("admin.html")
+    if (username=="admin" and password=="admin"): return render_template("admin.html")
+    return admin(message="ログインエラー")
 
 @app.route('/del-admin', methods=["POST"])
-def delete_user(message=None):
+def delete_user():
     username = request.form.get('user', None)
     if (userManager.check(username)):
         userManager.delete(username)
-        return admin(message="削除完了しました")
-    return admin(message="ユーザーが存在しません")
+        return render_template("admin.html", message="削除完了しました")
+    return render_template("admin.html", message="ユーザーが存在しません")
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,4 +1,11 @@
 {
     "pw": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
-    "tasks": {}
+    "tasks": {
+        "f55b810b-b462-49d4-9656-abc59b833850": {
+            "name": "\u3066\u3059\u3068",
+            "description": "\ud83c\udf63\r\n\u3059\u3057\r\n",
+            "status": "not ready",
+            "timeLimit": "2024/01/04 00:00:00"
+        }
+    }
 }
