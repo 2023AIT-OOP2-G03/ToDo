@@ -1,5 +1,6 @@
 from enum import Enum
 import json
+import datetime
 
 class task_status(str, Enum):
     NOT_READY = "not ready"
@@ -8,10 +9,11 @@ class task_status(str, Enum):
     DONE = "done"
 
 class task:
-    def __init__(self, name = "", description = "", status = task_status.NOT_READY):
+    def __init__(self, name = "", description = "", status = task_status.NOT_READY, timeLimit = datetime.datetime.now()):
         self.name = name
         self.description = description
         self.status = status
+        self.timeLimit = timeLimit
 
     def __str__(self):
         return f"{self.name}\n desc: {self.description}\n status: {self.status}"
@@ -40,6 +42,14 @@ class task:
             str: タスクのステータス
         """
         return self.status
+
+    def get_timeLimit(self):
+        """タスクの期限を取得する
+        
+        returns:
+            datetime.datetime: タスクの期限
+        """
+        return self.timeLimit
     
     def set_name(self, name):
         """タスク名を設定する
@@ -70,6 +80,16 @@ class task:
             str: タスクのステータス
         """
         self.status = status
+    
+    def set_timeLimit(self, timeLimit):
+        """タスクの期限を設定する
+        
+        args:
+            timeLimit (datetime.datetime): タスクの期限
+        returns:
+            datetime.datetime: タスクの期限
+        """
+        self.timeLimit = timeLimit
 
     def to_dict(self):
         """タスクを辞書型に変換する
