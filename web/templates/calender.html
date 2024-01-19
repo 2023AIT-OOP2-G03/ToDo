@@ -19,6 +19,8 @@
 
     <div id="calendar"></div>
 
+    <button id="jumpToList" onclick="location.href='./todo.html'">ToDo List</button>
+
     <script>
         let calendarEl = document.getElementById('calendar');
         const date = new Date();
@@ -66,7 +68,7 @@
 
         // 表示年月を更新する関数
         function updateDisplayedYYYYMM(year, month) {
-            document.getElementById('currentDisplayedYYYYMM').innerHTML = `${year}年${month + 1}月`;
+            document.getElementById('currentDisplayedYYYYMM').innerHTML = `${year}/${(month + 1).toString().padStart(2, '0')}`;
         }
 
         // 前の月ボタンを押したときの処理
