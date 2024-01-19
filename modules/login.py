@@ -1,16 +1,24 @@
 import json
 from modules import userManager
 
-USERS_FILE_PATH = './data/users.json'
-
 # 認証
 def login(id, pw):
-    # users.jsonを読み込み
-    users = json.load(open(USERS_FILE_PATH, 'r'))
+    """ログイン機能
+    
+    ログインの成功・失敗を判定する。
+    失敗時はエラーメッセージを返す
+    
+    Args:
+        id (str): ユーザーID
+        pw (str): パスワード
+    Returns:
+        bool: True(ログイン成功時)
+        str: エラーメッセージ(ログイン失敗時)
+    """
     # ユーザーの存在を確認
     if userManager.check(id):
         # パスワードの確認
-        if users[id]['pw'] == userManager.get_digest(pw):
+        if userManager.get_pw(id) == userManager.get_digest(pw):
             return True
         else:
             return "ログインに失敗しました。パスワードが違います。"

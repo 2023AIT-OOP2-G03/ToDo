@@ -1,31 +1,114 @@
-// Add your JavaScript code here
+let user = document.querySelector('#username').textContent
+let tasklist = document.querySelector('#taskList')
+let formdata = new FormData()
+formdata.append("user", user)
+
+fetch("/todo", {
+    method: "POST",
+    body: formdata
+}).then(response => response.json())
+.then(data => {
+    // サーバーからの応答を処理
+    createTaskListItem(data)
+})
+.catch(error => {
+    console.error('エラー:', error);
+});
+
 function addTask() {
-    var taskInput = document.getElementById('taskInput');
-    var taskList = document.getElementById('taskList');
+    taskInput = document.getElementById('taskInput'); //タスクの名前
+    taskContent = document.getElementById('taskContent');  //タスクの内容
+    taskDeadline = document.getElementById('taskDeadline'); //タスクの期限
 
-    if (taskInput.value.trim() !== '') {
-        // Create a new list item
-        var listItem = document.createElement('li');
+    if (taskInput.value.trim() !== '' && taskDeadline.value !== '') {
+        formdata = new FormData()
+        formdata.append("user", user) //ユーザーネーム
+        formdata.append("task_name", taskInput.value) //タスクの名前
+        formdata.append("task", taskContent.value) //タスクの内容
+        formdata.append("task_date", taskDeadline.value) //タスクの期限
+
+        // タスクの追加をサーバーに送信
+        fetch('/add', {
+            method: "POST",
+            body: formdata
+        }).then(response => response.json())
+        .then(data => {
+            // サーバーからの応答を処理
+            console.log('サーバーからの応答:', data);
+
+            createTaskListItem(data)
+
+            // 入力欄を空にする
+            taskInput.value = '';
+            taskContent.value = '';
+            taskDeadline.value = '';
+        })
+        .catch(error => {
+            console.error('エラー:', error);
+        });
+    }
+}
+
+function delTask(taskID) {
+    formdata = new FormData()
+    formdata.append("user", user) //ユーザーネーム
+    formdata.append("task_id", taskID) //タスクのID
+
+    // タスクの追加をサーバーに送信
+    fetch('/delete', {
+        method: "POST",
+        body: formdata
+    }).then(response => response.json())
+    .then(data => {
+        // サーバーからの応答を処理
+        console.log('サーバーからの応答:', data);
+
+        createTaskListItem(data)
+    })
+    .catch(error => {
+        console.error('エラー:', error);
+    });
+}
+
+function createTaskListItem(data) {
+    // 子要素を全削除
+    while (tasklist.firstChild) {
+        tasklist.removeChild(tasklist.firstChild)
+    }
+
+    keys = Object.keys(data)
+    for (i = 0; i < keys.length; i++) {
+        datas = Object.values(data)[i]
+        // console.log("--------------------")
+        // console.log("key : " + keys[i])
+        // console.log(datas.name)
+        // console.log(datas.description)
+        // console.log(datas.status)
+        // console.log(datas.timeLimit)
+        listItem = document.createElement('li');
         listItem.className = 'taskItem';
-
-        // Create a span for the task text
-        var taskText = document.createElement('span');
-        taskText.textContent = taskInput.value;
+         // タスク名
+        taskText = document.createElement('span');
+        taskText.textContent = datas.name;
         listItem.appendChild(taskText);
 
-        // Create a button for deleting the task
-        var deleteButton = document.createElement('button');
-        deleteButton.textContent = 'Delete';
+        // タスク内容
+        contentText = document.createElement('span');
+        contentText.textContent = datas.description;
+        listItem.appendChild(contentText);
+
+        // 期限
+        deadlineText = document.createElement('span');
+        deadlineText.textContent = datas.timeLimit;
+        listItem.appendChild(deadlineText);
+
+        // 削除ボタン
+        deleteButton = document.createElement('button');
+        deleteButton.textContent = '削除';
         deleteButton.className = 'deleteButton';
-        deleteButton.addEventListener('click', function () {
-            taskList.removeChild(listItem);
-        });
+        deleteButton.setAttribute('onclick', 'delTask("' + keys[i] + '")')
         listItem.appendChild(deleteButton);
 
-        // Add the list item to the task list
-        taskList.appendChild(listItem);
-
-        // Clear the input field
-        taskInput.value = '';
+        tasklist.appendChild(listItem);
     }
 }
