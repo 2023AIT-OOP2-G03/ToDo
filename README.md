@@ -4,7 +4,7 @@
 アカウントごとに管理されたカレンダーで確認できるToDoリスト
 
 主な機能は2つあり
-- ToDoリストに追加されたタスクに役職をつけることで、今やらなくていいタスクはカレンダーに非表示にすることで見やすくなっている。
+- ToDoリストに追加されたタスクに状態をつけることで、今やらなくていいタスクはカレンダーに非表示にすることで見やすくなっている。
 - アカウント処理されていることで、大人数でも使用することができる。
 
 ## Initial Setting
@@ -22,6 +22,5 @@ $ pip install -r requirements.txt
 ## Usage
 
 ```zsh
-$ source .env/bin/activate
-(.env) $ python main.py
+$ python main.py
 ```
