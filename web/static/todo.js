@@ -132,6 +132,11 @@ function createTaskListItem(data) {
         listItem = document.createElement('li');
         listItem.className = 'taskItem';
 
+        // タスクラベル
+        taskLabel = document.createElement('label');
+        taskLabel.textContent = 'タスク:';
+        taskLabel.setAttribute('class', 'taskLabel_js');
+        listItem.appendChild(taskLabel);
         // タスク名
         taskText = document.createElement('span');
         taskText.textContent = datas.name;
@@ -141,6 +146,11 @@ function createTaskListItem(data) {
         taskBreak = document.createElement('br');
         listItem.appendChild(taskBreak);
 
+        // タスク内容ラベル
+        taskLabel = document.createElement('label');
+        taskLabel.textContent = '内容:';
+        taskLabel.setAttribute('class', 'contentLabel_js');
+        listItem.appendChild(taskLabel);
         // タスク内容
         contentText = document.createElement('span');
         contentText.textContent = datas.description;
@@ -150,6 +160,11 @@ function createTaskListItem(data) {
         taskBreak = document.createElement('br');
         listItem.appendChild(taskBreak);
 
+        // 期限ラベル
+        taskLabel = document.createElement('label');
+        taskLabel.textContent = '期限:';
+        taskLabel.setAttribute('class', 'deadlineLabel_js');
+        listItem.appendChild(taskLabel);
         // 期限
         deadlineText = document.createElement('span');
         deadlineText.textContent = datas.timeLimit;
