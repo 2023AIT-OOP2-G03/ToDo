@@ -19,6 +19,7 @@ function addTask() {
     taskInput = document.getElementById('taskInput'); //タスクの名前
     taskContent = document.getElementById('taskContent');  //タスクの内容
     taskDeadline = document.getElementById('taskDeadline'); //タスクの期限
+    taskStatus = document.getElementById('taskStatus'); //タスクの状態
 
     if (taskInput.value.trim() !== '' && taskDeadline.value !== '') {
         formdata = new FormData()
@@ -26,6 +27,7 @@ function addTask() {
         formdata.append("task_name", taskInput.value) //タスクの名前
         formdata.append("task", taskContent.value) //タスクの内容
         formdata.append("task_date", taskDeadline.value) //タスクの期限
+        formdata.append("task_status", taskStatus.value) //タスクの状態
 
         // タスクの追加をサーバーに送信
         fetch('/add', {
