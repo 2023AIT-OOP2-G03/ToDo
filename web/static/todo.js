@@ -52,6 +52,8 @@ function addTask() {
 }
 
 function delTask(taskID) {
+    result = window.confirm("削除しますか？")
+    if (result == false) return;
     formdata = new FormData()
     formdata.append("user", user) //ユーザーネーム
     formdata.append("task_id", taskID) //タスクのID

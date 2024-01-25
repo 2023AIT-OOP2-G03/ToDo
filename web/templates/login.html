@@ -94,22 +94,22 @@
 
         {% if admin %}
         <form action="/admin" method="post">
-            {% else %}
-            <form action="/" method="post">
-                {% endif %}
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" name="user" placeholder="名前" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" name="pw" placeholder="パスワード" required>
-                </div>
-                <button type="button" class="newcreate-button"><a href="/registration">新規作成</a></button>
-                <br>
-                <p></p>
-                <button type="submit" class="login-button">ログイン</button>
-            </form>
+        {% else %}
+        <form action="/" method="post">
+            {% endif %}
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" name="user" placeholder="名前" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="pw" placeholder="パスワード" required>
+            </div>
+            <button type="button" class="newcreate-button"><a href="/registration">新規作成</a></button>
+            <br>
+            <p></p>
+            <button type="submit" class="login-button">ログイン</button>
+        </form>
     </div>
 </body>
 
