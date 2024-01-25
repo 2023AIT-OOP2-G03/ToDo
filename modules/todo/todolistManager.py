@@ -16,7 +16,7 @@ def add_task(userid, task: taskManager.task):
     """
     # idの生成
     id = uuid.uuid4()
-    set_task(userid, str(id), task)
+    set_task(userid = userid, taskid = str(id), task = task)
     
     
 def delete_task(userid, taskid):
@@ -26,10 +26,10 @@ def delete_task(userid, taskid):
         userid (str): ユーザーID
         taskid (str): タスクID
     """
-    if check_task(userid, taskid):
+    if check_task(userid = userid, taskid = taskid):
         tasks = get_tasks(userid)
         tasks.pop(taskid)
-        set_tasks(userid, tasks)
+        set_tasks(userid = userid, tasks = tasks)
     else:
         print("タスクが存在しません")
     
@@ -41,12 +41,12 @@ def set_task(userid, taskid, task: taskManager.task):
         userid (str): ユーザーID
         taskid (str): タスクID
         task (taskManager.task): タスク"""
-    tasks = get_tasks(userid)
+    tasks = get_tasks(userid = userid)
     
     # タスクの生成
     tasks[taskid] = task.to_dict()
     
-    set_tasks(userid, taskid, tasks)
+    set_tasks(userid = userid, tasks = tasks)
 
 def set_task_status(userid, taskid, status: taskManager.task_status):
     """タスクのステータスを設定する
@@ -56,9 +56,9 @@ def set_task_status(userid, taskid, status: taskManager.task_status):
         taskid (str): タスクID
         status (str): タスクのステータス
     """
-    tasks = get_tasks(userid)
+    tasks = get_tasks(userid = userid)
     tasks[taskid]["status"] = status
-    set_tasks(userid, tasks)
+    set_tasks(userid = userid, tasks = tasks)
 
 def get_tasks(userid):
     """タスクを取得する
@@ -92,22 +92,22 @@ def check_task(userid, taskid):
     returns:
         bool: タスクの存在(True: 存在する, False: 存在しない)
     """
-    tasks = get_tasks(userid)
+    tasks = get_tasks(userid = userid)
     if taskid in tasks:
         return True
     else:
         return False
 
 if __name__ == '__main__':
-    # task_date = dt.strptime("[2024-1-9]", "[%Y-%m-%d]")
-    # add_task("test", taskManager.task("ni", "nikome", taskManager.task_status.NOT_READY, task_date))
+    task_date = dt.strptime("[2024-1-9]", "[%Y-%m-%d]")
+    add_task("test", taskManager.task("ni", "nikome", taskManager.task_status.NOT_READY, task_date))
     
-    # tasks = get_tasks("test")
-    # for i in tasks:
-    #     print(i)
-    #     print(tasks[i])
-    #     delete_task("test", i)
+    tasks = get_tasks("test")
+    for i in tasks:
+        print(i)
+        print(tasks[i])
+        delete_task("test", i)
     
-    # print(type(tasks))
-    set_task_status("test", "f55b810b-b462-49d4-9656-abc59b833850", taskManager.task_status.DONE)
+    print(type(tasks))
+    # set_task_status("test", "f55b810b-b462-49d4-9656-abc59b833850", taskManager.task_status.DOING)
     pass
