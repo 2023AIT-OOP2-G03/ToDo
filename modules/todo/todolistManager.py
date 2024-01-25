@@ -46,7 +46,7 @@ def set_task(userid, taskid, task: taskManager.task):
     # タスクの生成
     tasks[taskid] = task.to_dict()
     
-    set_tasks(userid, taskid, tasks)
+    set_tasks(userid, tasks)
 
 def set_task_status(userid, taskid, status: taskManager.task_status):
     """タスクのステータスを設定する
@@ -109,5 +109,5 @@ if __name__ == '__main__':
     #     delete_task("test", i)
     
     # print(type(tasks))
-    set_task_status("test", "f55b810b-b462-49d4-9656-abc59b833850", taskManager.task_status.DONE)
+    set_task_status("test", "f55b810b-b462-49d4-9656-abc59b833850", taskManager.task_status.DOING)
     pass
