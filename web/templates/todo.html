@@ -25,6 +25,8 @@
             background-color: black;
         }
 
+
+
         #message-container,
         #error-container {
             padding: 1rem;
@@ -86,6 +88,22 @@
         .deadline-container {
             padding: 0px 5px 15px 0px;
         }
+
+        .task {
+            display: flex;
+            float: left;
+            padding: 20px 5px 20px 0px;
+        }
+
+        #taskStatus {
+            display: flex;
+            margin: 20px 5px 20px 0px;
+        }
+
+        .button {
+            display: flex;
+            margin: 20px 5px 20px 0px;
+        }
     </style>
 
     <script defer src="{{ url_for('static', filename='todo.js') }}"></script>
@@ -118,14 +136,14 @@
                 <input type="datetime-local" id="taskDeadline">
                 <br>
 
-                <label for="taskStatus">タスク状態：</label>
+                <label for="taskStatus" class="task">タスク状態：</label>
                 <select id="taskStatus">
                     <option value="0">準備中</option>
                     <option value="1">準備完了</option>
                     <option value="2">実行中</option>
                     <option value="3">完了</option>
                 </select>
-                <button type="button" onclick="addTask()">タスクを追加</button>
+                <button type="button" onclick="addTask()" class="button">タスクを追加</button>
             </form>
             <h2>現在のタスク</h2>
             <ul id="taskList">
@@ -140,6 +158,10 @@
 
             .taskItem {
                 font-size: 30px;
+            }
+
+            .taskStatus {
+                font-size: 15px;
             }
         </style>
 
