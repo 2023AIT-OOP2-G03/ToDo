@@ -50,7 +50,7 @@ def add_todo():
     username = request.form.get('user', None)
     task_name = request.form.get('task_name', None)
     task = request.form.get('task', None)
-    task_date = request.form.get('task_date', None)
+    task_date = dt.strptime(request.form.get('task_date', None), "%Y-%m-%d")
     # task_status = int(request.form.get('task_status', None))
 
     # if (task_status == 0): task_status = taskManager.task_status.NOT_READY
@@ -58,7 +58,7 @@ def add_todo():
     # elif (task_status == 2): task_status = taskManager.task_status.DOING
     # elif (task_status == 3): task_status = taskManager.task_status.DONE
 
-    todolistManager.add_task(username, taskManager.task(task_name, task, taskManager.task_status.NOT_READY, dt.strptime(task_date, "%Y-%m-%d")))
+    todolistManager.add_task(username, taskManager.task(task_name, task, taskManager.task_status.NOT_READY, task_date))
     todo_data = todolistManager.get_tasks(username)
 
     return jsonify(todo_data)
