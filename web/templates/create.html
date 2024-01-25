@@ -14,6 +14,7 @@
       align-items: center;
       justify-content: center;
       height: 100vh;
+      text-align: center;
     }
 
     .login-container {
@@ -21,11 +22,8 @@
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       padding: 20px;
-      width: 400px;
-    }
-
-    .login-container h2 {
-      text-align: center;
+      width: 320px;
+      height: 330px;
     }
 
     .form-group {
@@ -39,25 +37,9 @@
     }
 
     .form-group input {
-      width: 100%;
+      width: 300px;
       padding: 8px;
       box-sizing: border-box;
-    }
-
-    .login-button {
-      background-color: #3498db;
-      color: #fff;
-      padding: 10px;
-      border: none;
-      width: 100%;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-
-    .login-button:hover {
-      background-color: #2980b9;
     }
 
     .newcreate-button {
@@ -65,10 +47,11 @@
       color: #fff;
       padding: 10px;
       border: none;
-      width: 100%;
+      width: 90px;
       border-radius: 4px;
       cursor: pointer;
       font-size: 16px;
+      text-align: center;
     }
 
     .newcreate-button:hover {
@@ -86,12 +69,12 @@
     {% endif %}
     <form action="/registration" method="post">
       <div class="form-group">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="user" required>
+        <label for="username">Username</label>
+        <input type="text" id="username" name="user" class="form" placeholder="名前" required>
       </div>
       <div class="form-group">
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="pw" required>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="pw" class="form" placeholder="パスワード" required>
       </div>
 
       <button type="submit" class="newcreate-button" onclick="location.href='login.html'">新規作成</button>
