@@ -163,7 +163,7 @@ function createTaskListItem(data) {
         changeButton = document.createElement('button');
         changeButton.textContent = '変更';
         changeButton.className = 'changeButton';
-        changeButton.setAttribute('onclick', '')
+        changeButton.setAttribute('onclick', 'changeStatus("' + keys[i] + '")')
         listItem.appendChild(changeButton);
 
         // 削除ボタン
