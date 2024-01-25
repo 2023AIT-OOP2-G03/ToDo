@@ -89,6 +89,10 @@ def change_todo():
 
     return jsonify(todo_data)
 
+#カレンダーページ
+@app.route('/calender', methods=["GET"])
+def calender():
+    return render_template("calender.html")
 
 #管理者ページ
 @app.route('/admin', methods=["GET"])
