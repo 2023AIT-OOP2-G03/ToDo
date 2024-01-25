@@ -7,13 +7,13 @@ fetch("/todo", {
     method: "POST",
     body: formdata
 }).then(response => response.json())
-.then(data => {
-    // サーバーからの応答を処理
-    createTaskListItem(data)
-})
-.catch(error => {
-    console.error('エラー:', error);
-});
+    .then(data => {
+        // サーバーからの応答を処理
+        createTaskListItem(data)
+    })
+    .catch(error => {
+        console.error('エラー:', error);
+    });
 
 function addTask() {
     taskInput = document.getElementById('taskInput'); //タスクの名前
@@ -32,20 +32,20 @@ function addTask() {
             method: "POST",
             body: formdata
         }).then(response => response.json())
-        .then(data => {
-            // サーバーからの応答を処理
-            console.log('サーバーからの応答:', data);
+            .then(data => {
+                // サーバーからの応答を処理
+                console.log('サーバーからの応答:', data);
 
-            createTaskListItem(data)
+                createTaskListItem(data)
 
-            // 入力欄を空にする
-            taskInput.value = '';
-            taskContent.value = '';
-            taskDeadline.value = '';
-        })
-        .catch(error => {
-            console.error('エラー:', error);
-        });
+                // 入力欄を空にする
+                taskInput.value = '';
+                taskContent.value = '';
+                taskDeadline.value = '';
+            })
+            .catch(error => {
+                console.error('エラー:', error);
+            });
     }
 }
 
@@ -59,15 +59,15 @@ function delTask(taskID) {
         method: "POST",
         body: formdata
     }).then(response => response.json())
-    .then(data => {
-        // サーバーからの応答を処理
-        console.log('サーバーからの応答:', data);
+        .then(data => {
+            // サーバーからの応答を処理
+            console.log('サーバーからの応答:', data);
 
-        createTaskListItem(data)
-    })
-    .catch(error => {
-        console.error('エラー:', error);
-    });
+            createTaskListItem(data)
+        })
+        .catch(error => {
+            console.error('エラー:', error);
+        });
 }
 
 function createTaskListItem(data) {
@@ -76,6 +76,8 @@ function createTaskListItem(data) {
         tasklist.removeChild(tasklist.firstChild)
     }
 
+    // const str = "strID"
+    // const tmp = document.getElementById('span').innerHTML
     keys = Object.keys(data)
     for (i = 0; i < keys.length; i++) {
         datas = Object.values(data)[i]
@@ -87,7 +89,7 @@ function createTaskListItem(data) {
         // console.log(datas.timeLimit)
         listItem = document.createElement('li');
         listItem.className = 'taskItem';
-         // タスク名
+        // タスク名
         taskText = document.createElement('span');
         taskText.textContent = datas.name;
         listItem.appendChild(taskText);
@@ -110,5 +112,6 @@ function createTaskListItem(data) {
         listItem.appendChild(deleteButton);
 
         tasklist.appendChild(listItem);
+        // tmp[i].setAttribute("id", str + i)
     }
 }
