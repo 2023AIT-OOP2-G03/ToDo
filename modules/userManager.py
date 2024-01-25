@@ -4,6 +4,8 @@ import os
 
 USERS_DIR = './data/users/'
 
+LOGIN_TOKEN_FILE_PATH = './data/login_tokens.json'
+
 # 作成
 def create(id, pw):
     """ユーザーを作成する
@@ -97,10 +99,44 @@ def get_pw(id):
     else:
         return None
     
+def set_loginToken(id, loginToken):
+    """ユーザーのログイントークンを設定する
+    
+    args:
+        id (str): ユーザーID
+        loginToken (str): ログイントークン
+    """
+    if check(id):
+        # ログイントークンを設定
+        loginToken_file_path = LOGIN_TOKEN_FILE_PATH
+        loginTokens = json.load(open(loginToken_file_path, 'r'))
+        loginTokens[id] = loginToken
+        json.dump(loginTokens, open(loginToken_file_path, 'w'), indent = 4)
+    else:
+        print("ユーザーが存在しません")
+
+def get_loginToken(id):
+    """ユーザーのログイントークンを取得する
+    
+    args:
+        id (str): ユーザーID
+    returns:
+        str: ログイントークン
+    """
+    if check(id):
+        # ログイントークンを取得
+        loginToken_file_path = LOGIN_TOKEN_FILE_PATH
+        loginTokens = json.load(open(loginToken_file_path, 'r'))
+        return loginTokens[id]
+    else:
+        return None
 
 if __name__ == '__main__':
     # test
-    print(create('test', 'test'))
-    print(check('test'))
-    # print(delete('test'))
-    print(check('test'))
+    # print(create('test', 'test'))
+    # print(check('test'))
+    # # print(delete('test'))
+    # print(check('test'))
+    # set_loginToken('test', 'hypertest')
+    # print(get_loginToken('test'))
+    pass

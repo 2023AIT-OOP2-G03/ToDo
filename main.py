@@ -1,7 +1,9 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, make_response
 from modules import login, userManager
 from modules.todo import todolistManager, taskManager
 from datetime import datetime as dt
+import uuid
+import datetime
 
 app = Flask(__name__, static_folder='web/static', template_folder='web/templates')
 
@@ -25,7 +27,21 @@ def registration():
 #ログインページ
 @app.route('/', methods=["GET"])
 def index(message=None):
-    return render_template("login.html", message=message)
+    nologintoken = True
+    c_logintoken = request.cookies.get('loginToken', None)
+    c_username = request.cookies.get('username', None)
+    if (c_logintoken!=None and c_username!=None):
+        nologintoken = False
+        if (userManager.check(c_username)):
+            if (userManager.get_loginToken(c_username) == c_logintoken):
+                return render_template("todo.html", message=c_username)
+            else:
+                nologintoken = True
+
+    if (nologintoken):
+        return render_template("login.html", message=message)
+    else:
+        render_template("todo.html", message=c_username)
 
 @app.route('/', methods=["POST"])
 def login_():
@@ -33,7 +49,17 @@ def login_():
     password = request.form.get('pw', None)
     if (username==None and password==None): return index()
     result = login.login(username, password)
-    if (result==True): return render_template("todo.html", message=username)
+    if (result==True):
+        # uuidを発行し、それをloginTokenとする
+        loginToken = str(uuid.uuid4())
+        userManager.set_loginToken(username, loginToken)
+        res = make_response(render_template("todo.html", message=username))
+        # cookieにloginTokenを保存
+        max_age = 60 * 60 * 24 * 120 # 120 days
+        expires = int(datetime.now().timestamp()) + max_age
+        res.set_cookie('loginToken', loginToken, max_age=max_age, expires=expires, path='/', domain=domain, secure=None, httponly=False)
+        res.set_cookie('username', username, max_age=max_age, expires=expires, path='/', domain=domain, secure=None, httponly=False)
+        return res
     else: return index(message=result)
 
 
