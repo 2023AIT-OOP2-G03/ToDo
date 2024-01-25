@@ -72,6 +72,44 @@ function delTask(taskID) {
         });
 }
 
+function changeStatus(taskID) {
+    taskStatus = document.getElementById(taskID); //タスクの状態
+    formdata = new FormData()
+    formdata.append("user", user) //ユーザーネーム
+    formdata.append("task_id", taskID) //タスクのID
+    formdata.append("task_status", taskStatus.value) //タスクの状態
+
+    // タスクの変更をサーバーに送信
+    fetch('/change', {
+        method: "POST",
+        body: formdata
+    }).then(response => response.json())
+        .then(data => {
+            // サーバーからの応答を処理
+            console.log('サーバーからの応答:', data);
+
+            createTaskListItem(data)
+        })
+        .catch(error => {
+            console.error('エラー:', error);
+        });
+}
+
+function changeTaskStatus(Status) {
+    if (typeof(Status) == "string") {
+        if (Status == "not ready") return 0;
+        else if (Status == "ready") return 1;
+        else if (Status == "doing") return 2;
+        else if (Status == "done") return 3;
+    }
+    else {
+        if (Status == 0) return "準備中";
+        else if (Status == 1) return "準備完了";
+        else if (Status == 2) return "実行中";
+        else if (Status == 3) return "完了";
+    }
+}
+
 function createTaskListItem(data) {
     // 子要素を全削除
     while (tasklist.firstChild) {
@@ -111,22 +149,13 @@ function createTaskListItem(data) {
         statusSelect.setAttribute('id', keys[i]);
         statusSelect.setAttribute('class', 'taskStatus');
 
-        statusText = document.createElement('option');
-        statusText.textContent = "準備中";
-        statusText.setAttribute('value', 0);
-        statusSelect.appendChild(statusText);
-
-        taskStatusNum = 0;
-
-        // for (j = 0; j < 4; j++) {
-        //     statusText = document.createElement('option');
-        //     if (j == 0 && datas.status == "not ready") {
-        //         statusText.textContent = "準備中";
-        //     }
-        //     statusText.textContent = datas.status;
-        //     statusText.setAttribute('value', j);
-        //     statusSelect.appendChild(statusText);
-        // }
+        for (j = 0; j < 4; j++) {
+            statusText = document.createElement('option');
+            statusText.textContent = changeTaskStatus(j);
+            statusText.setAttribute('value', j);
+            if (j == changeTaskStatus(datas.status)) statusText.setAttribute('selected','');
+            statusSelect.appendChild(statusText);
+        }
 
         listItem.appendChild(statusSelect);
 

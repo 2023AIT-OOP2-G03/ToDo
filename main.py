@@ -73,6 +73,22 @@ def delete_todo():
 
     return jsonify(todo_data)
 
+@app.route('/change', methods=["POST"])
+def change_todo():
+    username = request.form.get('user', None)
+    task_id = request.form.get('task_id', None)
+    task_status = int(request.form.get('task_status', None))
+
+    if (task_status == 0): task_status = taskManager.task_status.NOT_READY
+    elif (task_status == 1): task_status = taskManager.task_status.READY
+    elif (task_status == 2): task_status = taskManager.task_status.DOING
+    elif (task_status == 3): task_status = taskManager.task_status.DONE
+
+    todolistManager.set_task_status(username, task_id, task_status)
+    todo_data = todolistManager.get_tasks(username)
+
+    return jsonify(todo_data)
+
 
 #管理者ページ
 @app.route('/admin', methods=["GET"])
