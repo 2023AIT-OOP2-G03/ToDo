@@ -104,6 +104,11 @@ function createTaskListItem(data) {
         deadlineText.textContent = datas.timeLimit;
         listItem.appendChild(deadlineText);
 
+        // 状態
+        statusText = document.createElement('span');
+        statusText.textContent = datas.status;
+        listItem.appendChild(statusText);
+
         // 削除ボタン
         deleteButton = document.createElement('button');
         deleteButton.textContent = '削除';
