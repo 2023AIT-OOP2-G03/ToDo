@@ -46,6 +46,18 @@ def set_task(userid, taskid, task: taskManager.task):
     # タスクの生成
     tasks[taskid] = task.to_dict()
     
+    set_tasks(userid, taskid, tasks)
+
+def set_task_status(userid, taskid, status: taskManager.task_status):
+    """タスクのステータスを設定する
+    
+    args:
+        userid (str): ユーザーID
+        taskid (str): タスクID
+        status (str): タスクのステータス
+    """
+    tasks = get_tasks(userid)
+    tasks[taskid]["status"] = status
     set_tasks(userid, tasks)
 
 def get_tasks(userid):
@@ -87,14 +99,15 @@ def check_task(userid, taskid):
         return False
 
 if __name__ == '__main__':
-    task_date = dt.strptime("[2024-1-9]", "[%Y-%m-%d]")
-    add_task("test", taskManager.task("ni", "nikome", taskManager.task_status.NOT_READY, task_date))
+    # task_date = dt.strptime("[2024-1-9]", "[%Y-%m-%d]")
+    # add_task("test", taskManager.task("ni", "nikome", taskManager.task_status.NOT_READY, task_date))
     
-    tasks = get_tasks("test")
-    for i in tasks:
-        print(i)
-        print(tasks[i])
-        # delete_task("test", i)
+    # tasks = get_tasks("test")
+    # for i in tasks:
+    #     print(i)
+    #     print(tasks[i])
+    #     delete_task("test", i)
     
-    print(type(tasks))
+    # print(type(tasks))
+    set_task_status("test", "f55b810b-b462-49d4-9656-abc59b833850", taskManager.task_status.DONE)
     pass
