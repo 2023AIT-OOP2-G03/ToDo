@@ -1,35 +1,11 @@
 {
     "pw": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
     "tasks": {
-        "f55b810b-b462-49d4-9656-abc59b833850": {
-            "name": "\u3066\u3059\u3068",
-            "description": "\ud83c\udf63\r\n\u3059\u3057\r\n",
-            "status": "doing",
-            "timeLimit": "2024/01/04 00:00:00"
-        },
-        "8bfb3e31-dccb-4a79-86f8-e8be443f9c2c": {
-            "name": "rere",
-            "description": "vfsfs\r\nffefs\r\nfwwfe",
-            "status": "not ready",
-            "timeLimit": "2024/01/10 00:00:00"
-        },
-        "2da78de8-bfff-48b6-b2ee-776f2a893a94": {
-            "name": "rere",
-            "description": "gs",
-            "status": "not ready",
-            "timeLimit": "2024/01/03 00:00:00"
-        },
         "63801733-e2f5-47e0-8ed5-53d7ec55ca92": {
             "name": "\u4eca\u65e5",
             "description": "\u306f\u96ea\u26c4\ufe0f",
             "status": "doing",
             "timeLimit": "2024/01/25 14:00:00"
-        },
-        "1cabcdb3-7d3f-460d-a34e-fd40f502e865": {
-            "name": "\u3053\u3093\u306b\u3061\u308f",
-            "description": "\u6e96\u5099\u4e2d",
-            "status": "doing",
-            "timeLimit": "2024/02/10 19:29:00"
         }
     }
 }
