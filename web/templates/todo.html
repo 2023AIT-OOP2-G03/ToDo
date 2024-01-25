@@ -76,13 +76,13 @@
         #taskInput {
             width: 400px;
             height: 30px;
-            color: lightgray;
+            color: black;
             background-color: white;
         }
 
         #taskContent {
             width: 400px;
-            color: lightgray;
+            color: black;
             background-color: white;
         }
 
@@ -154,12 +154,12 @@
                 </div>
 
                 <div class="taskDeadline">
-                    <label for="taskDeadline">期限：</label>
+                    <label for="taskDeadline">期限:</label>
                     <input type="datetime-local" id="taskDeadline">
                     <br>
                 </div>
 
-                <label for="taskStatus" class="task">タスク状態：</label>
+                <label for="taskStatus" class="task">タスク状態:</label>
                 <select id="taskStatus">
                     <option value="0">準備中</option>
                     <option value="1">準備完了</option>
@@ -189,9 +189,23 @@
                 font-size: 15px;
             }
 
+            .taskLabel_js {
+                color: black;
+                font-family: Arial;
+                font-size: 25px;
+                margin: 10px 10px 10px 0px;
+            }
+
             .task_js {
                 color: black;
                 font-family: Arial;
+            }
+
+            .contentLabel_js {
+                color: black;
+                font-family: Arial;
+                font-size: 25px;
+                margin: 10px 10px 10px 0px;
             }
 
             .content_js {
@@ -199,11 +213,18 @@
                 font-family: Arial;
             }
 
+            .deadlineLabel_js {
+                color: black;
+                font-family: Arial;
+                font-size: 25px;
+                margin: 10px 10px 10px 0px;
+            }
+
             .status_js {
                 font-size: 15px;
                 background-color: #3291FF;
                 border-style: none;
-                margin: 20px 5px 10px 10px;
+                margin: 20px 5px 20px 10px;
             }
 
             .button {
