@@ -7,11 +7,24 @@
     <title>Todo List</title>
 
     <!-- new.css -->
-    <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+    <!-- <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css"> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
 
     <!-- メッセージ表示用のCSSを定義 -->
     <style>
+        h1 {
+            font-family: Arial;
+            font-size: 50px;
+        }
+
+        header {
+            background-color: dimgrey;
+        }
+
+        body {
+            background-color: black;
+        }
+
         #message-container,
         #error-container {
             padding: 1rem;
@@ -25,9 +38,53 @@
             color: #dc3545;
         }
 
+        #userID {
+            float: left;
+            padding: 15px 10px 10px 0px;
+        }
+
         #username {
             display: flex;
-            justify-content: flex-end;
+            padding: 15px 10px 10px 0px;
+            /* justify-content: flex-end; */
+        }
+
+        .box1 {
+            justify-content: space-evenly;
+            text-align: left;
+        }
+
+        .box2 {
+            justify-content: start;
+            text-align: left;
+        }
+
+        .formName {
+            font-family: Arial;
+            font-size: 20px;
+            vertical-align: top;
+        }
+
+        #taskInput {
+            width: 400px;
+            height: 30px;
+        }
+
+        #taskContent {
+            width: 400px;
+
+        }
+
+        .button {
+            padding: auto;
+        }
+
+        .taskContent-container {
+            padding: 20px 5px 10px 0px;
+        }
+
+        .deadline-container {
+            padding: 0px 5px 15px 0px;
         }
     </style>
 
@@ -38,19 +95,24 @@
     <header>
         <h1>Todo List</h1>
         {% if message %}
-        <h2>ユーザID:</h2><h2 id="username">{{ message }}</h2>
+        <h2 id="userID">ユーザID:</h2>
+
+        <h2 id="username" class="username">{{ message }}</h2>
+
         {% endif %}
     </header>
     <main>
         <section>
             <form id="taskForm">
-                <label for="taskInput">タスク名：</label>
+                <label for="taskInput" class="formName">タスク名:</label>
                 <input type="text" id="taskInput" placeholder="タスクを入力してください">
                 <br>
 
-                <label for="taskContent">タスク内容：</label>
-                <textarea id="taskContent" placeholder="タスクの詳細"></textarea>
-                <br>
+                <div class="taskContent-container">
+                    <label for="taskContent" class="formName">タスク内容:</label>
+                    <textarea id="taskContent" placeholder="タスクの詳細"></textarea>
+                    <br>
+                </div>
 
                 <label for="taskDeadline">期限：</label>
                 <input type="datetime-local" id="taskDeadline">
@@ -63,7 +125,6 @@
                     <option value="2">実行中</option>
                     <option value="3">完了</option>
                 </select>
-
                 <button type="button" onclick="addTask()">タスクを追加</button>
             </form>
             <h2>現在のタスク</h2>
@@ -71,6 +132,16 @@
                 <!-- タスク表示 -->
             </ul>
         </section>
+
+        <style>
+            ul {
+                list-style: none;
+            }
+
+            .taskItem {
+                font-size: 30px;
+            }
+        </style>
 
     </main>
 
