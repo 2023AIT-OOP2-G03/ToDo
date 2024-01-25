@@ -3,7 +3,6 @@ from modules import login, userManager
 from modules.todo import todolistManager, taskManager
 from datetime import datetime as dt
 import uuid
-import datetime
 
 app = Flask(__name__, static_folder='web/static', template_folder='web/templates')
 
@@ -56,9 +55,9 @@ def login_():
         res = make_response(render_template("todo.html", message=username))
         # cookieにloginTokenを保存
         max_age = 60 * 60 * 24 * 120 # 120 days
-        expires = int(datetime.now().timestamp()) + max_age
-        res.set_cookie('loginToken', loginToken, max_age=max_age, expires=expires, path='/', domain=domain, secure=None, httponly=False)
-        res.set_cookie('username', username, max_age=max_age, expires=expires, path='/', domain=domain, secure=None, httponly=False)
+        expires = int(dt.now().timestamp()) + max_age
+        res.set_cookie('loginToken', loginToken, max_age=max_age, expires=expires, path='/', domain=request.host, secure=None, httponly=False)
+        res.set_cookie('username', username, max_age=max_age, expires=expires, path='/', domain=request.host, secure=None, httponly=False)
         return res
     else: return index(message=result)
 
