@@ -3,123 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>かれんだーだお</title>
+    <title>Calendar | Task Flower</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/calendar.css">
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
-
-        h1 {
-            margin-bottom: 10px;
-        }
-
-        button {
-            margin: 0 5px;
-            cursor: pointer;
-        }
-
-        #currentDisplayedYYYYMM {
-            text-align: center;
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-
-        /* カレンダーのスタイル */
-        #calendar {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 20px;
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        th, td {
-            border: 1px solid #ccc;
-            padding: 10px;
-            text-align: center;
-        }
-
-        /* 日付ボタンのスタイル */
-        .day-button {
-            cursor: pointer;
-            background-color: rgb(113, 161, 249);
-            border: 1px solid rgb(113, 161, 249);
-            padding: 10px;
-            margin: 5px;
-            width: 50px;
-            height: 50px;
-            text-align: center;
-            font-size: 40px;
-            border-radius: 50%; /* 丸くするための設定 */
-            opacity: 0.7; /* 半透明にする */
-            position: relative; /* 相対位置指定 */
-            z-index: 1; /* 他の要素より上に配置 */
-        }
-
-        /*日付のスタイル*/
-        .day-button span {
-            position: absolute;
-            font-size: 50px;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 2; /* テキストはday-buttonの上に配置 */
-        }
-
-        .font {
-            font-size: 50px;
-        }
-
-        font span {
-            position: absolute;
-            font-size: 40px;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 2; /* テキストはday-buttonの上に配置 */
-        }
-        .taskTitleCell {
-            margin-top: 5px;
-            font-size: 12px;
-        }
-
-        /* モーダルのスタイル */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding: 20px;
-            background-color: #fff;
-            border: 2px solid #ccc;
-            z-index: 1000;
-            text-align: center;
-        }
-
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-        }
-    </style>
+    <link rel="stylesheet" href="../static/calendar.css"> <!-- use this -->
+    <!-- <style> was moved to 'calendar.css' -->
+    
 </head>
 
 <body>
@@ -127,17 +15,23 @@
     <h1>Calendar</h1>
     <div id="header">
         <div id="currentDisplayedYYYYMM"></div>
-        <button id="prevMonth" onclick="prevClick()">前の月</button>
-        <button id="nextMonth" onclick="nextClick()">次の月</button>
+        <button id="prevMonth" onclick="prevClick()">< Preview</button>
+        <button id="nextMonth" onclick="nextClick()">Next    ></button>
     </div>
+
+    <button id="jumpToList" onclick="location.href='./todo.html'">ToDo List is here</button>
 
     <div id="calendar"></div>
 
     <!-- イベントの詳細を表示するためのモーダルウィンドウ -->
     <div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
     <div class="modal" id="myModal">
-        <p id="modalContent">ここに予定の内容を入れる</p>
-        <button onclick="closeModal()">閉じる</button>
+        <div class="modal-close">
+            <button onclick="closeModal()">❌</button>
+        </div>
+        <div>
+            <p id="modalContent">ここに予定の内容を入れる</p>
+        </div>
     </div>
 
     <script>
@@ -189,7 +83,7 @@
 
         // ヘッダーに表示されている月と年を更新する関数
         function updateDisplayedYYYYMM(year, month) {
-            document.getElementById('currentDisplayedYYYYMM').innerHTML = `${year}年${month + 1}月`;
+            document.getElementById('currentDisplayedYYYYMM').innerHTML = `${year}/${(month + 1).toString().padStart(2, '0')}`;
         }
 
         // モーダルウィンドウを開く関数

@@ -13,3 +13,129 @@ table, table th, table td {
     border-collapse: collapse;
     border:1px solid black;
 }
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    margin-bottom: 10px;
+}
+
+button {
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+#currentDisplayedYYYYMM {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+/* カレンダーのスタイル */
+#calendar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+/* 日付ボタンのスタイル */
+.day-button {
+    cursor: pointer;
+    background-color: rgb(113, 161, 249);
+    border: 1px solid rgb(113, 161, 249);
+    padding: 10px;
+    margin: 5px;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    font-size: 40px;
+    border-radius: 50%; /* 丸くするための設定 */
+    opacity: 0.7; /* 半透明にする */
+    position: relative; /* 相対位置指定 */
+    z-index: 1; /* 他の要素より上に配置 */
+}
+
+/*日付のスタイル*/
+.day-button span {
+    position: absolute;
+    font-size: 50px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2; /* テキストはday-buttonの上に配置 */
+}
+
+.font {
+    font-size: 50px;
+}
+
+font span {
+    position: absolute;
+    font-size: 40px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2; /* テキストはday-buttonの上に配置 */
+}
+.taskTitleCell {
+    margin-top: 5px;
+    font-size: 12px;
+}
+
+/* モーダルのスタイル */
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #fff;
+    border: 2px solid #ccc;
+    z-index: 1000;
+    text-align: center;
+}
+
+.modal-close {
+    /* display: none; */
+    position: fixed;
+    top: 20%;
+    right: -8%;
+    transform: translate(-50%, -50%);
+    padding: 0px;
+    background-color: #fff;
+    border: 2px solid #fff;
+    z-index: 1000;
+    text-align: right;
+}
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
