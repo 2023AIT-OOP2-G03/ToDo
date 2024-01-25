@@ -98,7 +98,7 @@ function changeStatus(taskID) {
 }
 
 function changeTaskStatus(Status) {
-    if (typeof(Status) == "string") {
+    if (typeof (Status) == "string") {
         if (Status == "not ready") return 0;
         else if (Status == "ready") return 1;
         else if (Status == "doing") return 2;
@@ -131,31 +131,41 @@ function createTaskListItem(data) {
         // console.log(datas.timeLimit)
         listItem = document.createElement('li');
         listItem.className = 'taskItem';
+
         // タスク名
         taskText = document.createElement('span');
         taskText.textContent = datas.name;
+        taskText.setAttribute('class', 'task_js')
         listItem.appendChild(taskText);
+        // 見た目を整える用
+        taskBreak = document.createElement('br');
+        listItem.appendChild(taskBreak);
 
         // タスク内容
         contentText = document.createElement('span');
         contentText.textContent = datas.description;
+        contentText.setAttribute('class', 'content_js')
         listItem.appendChild(contentText);
+        // 見た目を整える用
+        taskBreak = document.createElement('br');
+        listItem.appendChild(taskBreak);
 
         // 期限
         deadlineText = document.createElement('span');
         deadlineText.textContent = datas.timeLimit;
+        deadlineText.setAttribute('class', 'deadline_js')
         listItem.appendChild(deadlineText);
 
         // 状態
         statusSelect = document.createElement('select');
         statusSelect.setAttribute('id', keys[i]);
-        statusSelect.setAttribute('class', 'taskStatus');
+        statusSelect.setAttribute('class', 'status_js');
 
         for (j = 0; j < 4; j++) {
             statusText = document.createElement('option');
             statusText.textContent = changeTaskStatus(j);
             statusText.setAttribute('value', j);
-            if (j == changeTaskStatus(datas.status)) statusText.setAttribute('selected','');
+            if (j == changeTaskStatus(datas.status)) statusText.setAttribute('selected', '');
             statusSelect.appendChild(statusText);
         }
 
@@ -168,12 +178,17 @@ function createTaskListItem(data) {
         changeButton.setAttribute('onclick', 'changeStatus("' + keys[i] + '")')
         listItem.appendChild(changeButton);
 
+        // 見た目を整える用
+        taskBreak = document.createElement('br');
+        listItem.appendChild(taskBreak);
+
         // 削除ボタン
         deleteButton = document.createElement('button');
         deleteButton.textContent = '削除';
         deleteButton.className = 'deleteButton';
         deleteButton.setAttribute('onclick', 'delTask("' + keys[i] + '")')
         listItem.appendChild(deleteButton);
+
 
         tasklist.appendChild(listItem);
         // tmp[i].setAttribute("id", str + i)
