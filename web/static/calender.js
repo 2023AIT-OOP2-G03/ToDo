@@ -1,39 +1,4 @@
-<!DOCTYPE html>
-<html lang="ja">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Calendar | Task Flower</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/calendar.css"> 
-</head>
-
-<body>
-    <!-- カレンダーのヘッダーおよびナビゲーションボタン -->
-    <h1>Calendar</h1>
-    <div id="header">
-        <div id="currentDisplayedYYYYMM"></div>
-        <button id="prevMonth" onclick="prevClick()">< Preview</button>
-        <button id="nextMonth" onclick="nextClick()">Next    ></button>
-    </div>
-
-    <button id="jumpToList" onclick="location.href='./todo.html'">ToDo List is here</button>
-
-    <div id="calendar"></div>
-
-    <!-- イベントの詳細を表示するためのモーダルウィンドウ -->
-    <div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
-    <div class="modal" id="myModal">
-        <div class="modal-close">
-            <button onclick="closeModal()">❌</button>
-        </div>
-        <div>
-            <p id="modalContent">ここに予定の内容を入れる</p>
-        </div>
-    </div>
-
-    <script>
-        let calendarEl = document.getElementById('calendar');
+let calendarEl = document.getElementById('calendar');
         const date = new Date();
         const currentYear = date.getFullYear();
         const currentMonth = date.getMonth();
@@ -128,8 +93,3 @@
             updateCalendar(currentDisplayedYear, currentDisplayedMonth);
             updateDisplayedYYYYMM(currentDisplayedYear, currentDisplayedMonth);
         };
-
-    </script>
-</body>
-
-</html>

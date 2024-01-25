@@ -5,108 +5,23 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Todo List</title>
-
-    <!-- new.css -->
-    <!-- <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css"> -->
+    <link rel="stylesheet" href="../static/calendar.css">
+    <link rel="stylesheet" href="../static/todo.css">
+    <!-- External CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
-
-    <!-- メッセージ表示用のCSSを定義 -->
+    <!-- JavaScript -->
+    <script defer src="{{ url_for('static', filename='todo.js') }}"></script>
     <style>
-        h1 {
-            font-family: Arial;
-            font-size: 50px;
+        ul {
+            list-style: none;
         }
-
-        header {
-            background-color: dimgrey;
+        .taskItem {
+            font-size: 30px;
         }
-
-        body {
-            background-color: black;
-        }
-
-
-
-        #message-container,
-        #error-container {
-            padding: 1rem;
-            border: 1px solid #e9ecef;
-            border-left-width: 0.25rem;
-            border-left-color: #5bc0de;
-            border-radius: 0.25rem;
-        }
-
-        #error-container {
-            color: #dc3545;
-        }
-
-        #userID {
-            float: left;
-            padding: 15px 10px 10px 0px;
-        }
-
-        #username {
-            display: flex;
-            padding: 15px 10px 10px 0px;
-            /* justify-content: flex-end; */
-        }
-
-        .box1 {
-            justify-content: space-evenly;
-            text-align: left;
-        }
-
-        .box2 {
-            justify-content: start;
-            text-align: left;
-        }
-
-        .formName {
-            font-family: Arial;
-            font-size: 20px;
-            vertical-align: top;
-        }
-
-        #taskInput {
-            width: 400px;
-            height: 30px;
-        }
-
-        #taskContent {
-            width: 400px;
-
-        }
-
-        .button {
-            padding: auto;
-        }
-
-        .taskContent-container {
-            padding: 20px 5px 10px 0px;
-        }
-
-        .deadline-container {
-            padding: 0px 5px 15px 0px;
-        }
-
-        .task {
-            display: flex;
-            float: left;
-            padding: 20px 5px 20px 0px;
-        }
-
-        #taskStatus {
-            display: flex;
-            margin: 20px 5px 20px 0px;
-        }
-
-        .button {
-            display: flex;
-            margin: 20px 5px 20px 0px;
+        .taskStatus {
+            font-size: 15px;
         }
     </style>
-
-    <script defer src="{{ url_for('static', filename='todo.js') }}"></script>
 </head>
 
 <body>
@@ -114,28 +29,21 @@
         <h1>Todo List</h1>
         {% if message %}
         <h2 id="userID">ユーザID:</h2>
-
         <h2 id="username" class="username">{{ message }}</h2>
-
         {% endif %}
     </header>
     <main>
         <section>
+            <!-- Todo Task Form -->
             <form id="taskForm">
                 <label for="taskInput" class="formName">タスク名:</label>
-                <input type="text" id="taskInput" placeholder="タスクを入力してください">
-                <br>
-
+                <input type="text" id="taskInput" placeholder="タスクを入力してください"><br>
                 <div class="taskContent-container">
                     <label for="taskContent" class="formName">タスク内容:</label>
-                    <textarea id="taskContent" placeholder="タスクの詳細"></textarea>
-                    <br>
+                    <textarea id="taskContent" placeholder="タスクの詳細"></textarea><br>
                 </div>
-
                 <label for="taskDeadline">期限：</label>
-                <input type="datetime-local" id="taskDeadline">
-                <br>
-
+                <input type="datetime-local" id="taskDeadline"><br>
                 <label for="taskStatus" class="task">タスク状態：</label>
                 <select id="taskStatus">
                     <option value="0">準備中</option>
@@ -145,28 +53,34 @@
                 </select>
                 <button type="button" onclick="addTask()" class="button">タスクを追加</button>
             </form>
+            <!-- Current Tasks -->
             <h2>現在のタスク</h2>
             <ul id="taskList">
-                <!-- タスク表示 -->
+                <!-- Tasks will be dynamically added here -->
             </ul><br />
-            <!-- カレンダーに戻るボタン -->
-            <button onclick="location.href='./calender.html'">カレンダーに戻る</button>
+            <!-- Calendar Section -->
+            <div id="header">
+                <div id="currentDisplayedYYYYMM"></div>
+                <button id="prevMonth" onclick="prevClick()">&lt; Preview</button>
+                <button id="nextMonth" onclick="nextClick()">Next &gt;</button>
+            </div>
+            <div id="calendar"></div>
+            <!-- Event Modal -->
+            <div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
+            <div class="modal" id="myModal">
+                <div class="modal-close">
+                    <button onclick="closeModal()">❌</button>
+                </div>
+                <div>
+                    <p id="modalContent">ここに予定の内容を入れる</p>
+                </div>
+            </div>
         </section>
-
-        <style>
-            ul {
-                list-style: none;
-            }
-
-            .taskItem {
-                font-size: 30px;
-            }
-
-            .taskStatus {
-                font-size: 15px;
-            }
-        </style>
-
     </main>
+    <!-- JavaScript -->
+    <script>
+        
+    </script>
 </body>
+
 </html>
