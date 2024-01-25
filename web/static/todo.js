@@ -105,9 +105,35 @@ function createTaskListItem(data) {
         listItem.appendChild(deadlineText);
 
         // 状態
-        statusText = document.createElement('span');
-        statusText.textContent = datas.status;
-        listItem.appendChild(statusText);
+        statusSelect = document.createElement('select');
+        statusSelect.setAttribute('id', keys[i]);
+        statusSelect.setAttribute('class', 'taskStatus');
+
+        statusText = document.createElement('option');
+        statusText.textContent = "準備中";
+        statusText.setAttribute('value', 0);
+        statusSelect.appendChild(statusText);
+
+        taskStatusNum = 0;
+
+        // for (j = 0; j < 4; j++) {
+        //     statusText = document.createElement('option');
+        //     if (j == 0 && datas.status == "not ready") {
+        //         statusText.textContent = "準備中";
+        //     }
+        //     statusText.textContent = datas.status;
+        //     statusText.setAttribute('value', j);
+        //     statusSelect.appendChild(statusText);
+        // }
+
+        listItem.appendChild(statusSelect);
+
+        // 変更ボタン
+        changeButton = document.createElement('button');
+        changeButton.textContent = '変更';
+        changeButton.className = 'changeButton';
+        changeButton.setAttribute('onclick', '')
+        listItem.appendChild(changeButton);
 
         // 削除ボタン
         deleteButton = document.createElement('button');
