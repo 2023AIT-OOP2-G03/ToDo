@@ -93,3 +93,20 @@ let calendarEl = document.getElementById('calendar');
             updateCalendar(currentDisplayedYear, currentDisplayedMonth);
             updateDisplayedYYYYMM(currentDisplayedYear, currentDisplayedMonth);
         };
+
+        let user = document.querySelector('#username').textContent
+        let tasklist = document.querySelector('#taskList')
+        let formdata = new FormData()
+        formdata.append("user", user)
+
+        fetch("/todo", {
+            method: "POST",
+            body: formdata
+        }).then(response => response.json())
+            .then(data => {
+                // サーバーからの応答を処理
+                createTaskListItem(data)
+            })
+            .catch(error => {
+                console.error('エラー:', error);
+            });
