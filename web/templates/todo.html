@@ -5,23 +5,129 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Todo List</title>
-    <link rel="stylesheet" href="../static/calendar.css">
-    <link rel="stylesheet" href="../static/todo.css">
-    <!-- External CSS -->
+
+    <!-- new.css -->
+    <!-- <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css"> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
-    <!-- JavaScript -->
-    <script defer src="{{ url_for('static', filename='todo.js') }}"></script>
+
+    <!-- メッセージ表示用のCSSを定義 -->
     <style>
-        ul {
-            list-style: none;
+        h1 {
+            font-family: Arial;
+            color: black;
+            font-size: 50px;
         }
-        .taskItem {
-            font-size: 30px;
+
+        h2 {
+            color: black;
         }
-        .taskStatus {
-            font-size: 15px;
+
+        header {
+            background-color: #F4F4F4;
+        }
+
+        body {
+            background-color: white;
+        }
+
+
+
+        #message-container,
+        #error-container {
+            padding: 1rem;
+            border: 1px solid #e9ecef;
+            border-left-width: 0.25rem;
+            border-left-color: #5bc0de;
+            border-radius: 0.25rem;
+        }
+
+        #error-container {
+            color: #dc3545;
+        }
+
+        #userID {
+            float: left;
+            padding: 15px 10px 10px 0px;
+        }
+
+        #username {
+            display: flex;
+            padding: 15px 10px 10px 0px;
+            /* justify-content: flex-end; */
+        }
+
+        .box1 {
+            justify-content: space-evenly;
+            text-align: left;
+        }
+
+        .box2 {
+            justify-content: start;
+            text-align: left;
+        }
+
+        .formName {
+            color: black;
+            font-family: Arial;
+            font-size: 20px;
+            vertical-align: top;
+        }
+
+        #taskInput {
+            width: 400px;
+            height: 30px;
+            color: black;
+            background-color: white;
+        }
+
+        #taskContent {
+            width: 400px;
+            color: black;
+            background-color: white;
+        }
+
+        .button {
+            padding: auto;
+        }
+
+        .taskContent-container {
+            padding: 20px 5px 10px 0px;
+        }
+
+        .deadline-container {
+            padding: 0px 5px 15px 0px;
+        }
+
+        .task {
+            font-family: Arial;
+            font-size: 20px;
+            color: black;
+            display: flex;
+            float: left;
+            padding: 20px 5px 20px 0px;
+        }
+
+        #taskStatus {
+            font-family: Arial;
+            display: flex;
+            background-color: white;
+            color: black;
+            margin: 20px 5px 20px 0px;
+        }
+
+        .taskDeadline {
+            font-family: Arial;
+            font-size: 20px;
+            color: black;
+        }
+
+        #taskDeadline {
+            color: black;
+            background-color: white;
         }
     </style>
+
+    <script defer src="{{ url_for('static', filename='todo.js') }}"></script>
 </head>
 
 <body>
@@ -29,22 +135,31 @@
         <h1>Todo List</h1>
         {% if message %}
         <h2 id="userID">ユーザID:</h2>
+
         <h2 id="username" class="username">{{ message }}</h2>
+
         {% endif %}
     </header>
     <main>
         <section>
-            <!-- Todo Task Form -->
             <form id="taskForm">
                 <label for="taskInput" class="formName">タスク名:</label>
-                <input type="text" id="taskInput" placeholder="タスクを入力してください"><br>
+                <input type="text" id="taskInput" placeholder="タスクを入力してください">
+                <br>
+
                 <div class="taskContent-container">
                     <label for="taskContent" class="formName">タスク内容:</label>
-                    <textarea id="taskContent" placeholder="タスクの詳細"></textarea><br>
+                    <textarea id="taskContent" placeholder="タスクの詳細"></textarea>
+                    <br>
                 </div>
-                <label for="taskDeadline">期限：</label>
-                <input type="datetime-local" id="taskDeadline"><br>
-                <label for="taskStatus" class="task">タスク状態：</label>
+
+                <div class="taskDeadline">
+                    <label for="taskDeadline">期限:</label>
+                    <input type="datetime-local" id="taskDeadline">
+                    <br>
+                </div>
+
+                <label for="taskStatus" class="task">タスク状態:</label>
                 <select id="taskStatus">
                     <option value="0">準備中</option>
                     <option value="1">準備完了</option>
@@ -53,125 +168,78 @@
                 </select>
                 <button type="button" onclick="addTask()" class="button">タスクを追加</button>
             </form>
-            <!-- Current Tasks -->
             <h2>現在のタスク</h2>
             <ul id="taskList">
-                <!-- Tasks will be dynamically added here -->
+                <!-- タスク表示 -->
             </ul><br />
-
-
-            <!-- Calendar Section -->
-            <div id="head">
-                <div id="currentDisplayedYYYYMM"></div>
-                <button id="prevMonth" onclick="prevClick()">&lt; Preview</button>
-                <button id="nextMonth" onclick="nextClick()">Next &gt;</button>
-            </div>
-            <div id="calendar"></div>
-            <!-- Event Modal -->
-            <div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
-            <div class="modal" id="myModal">
-                <div class="modal-close">
-                    <button onclick="closeModal()">❌</button>
-                </div>
-                <div>
-                    <p id="modalContent">ここに予定の内容を入れる</p>
-                </div>
-            </div>
+            <!-- カレンダーに戻るボタン -->
+            <button onclick="location.href='/calender'">カレンダーに戻る</button>
         </section>
+
+        <style>
+            ul {
+                list-style: none;
+            }
+
+            .taskItem {
+                font-size: 30px;
+            }
+
+            .taskStatus {
+                font-size: 15px;
+            }
+
+            .taskLabel_js {
+                color: black;
+                font-family: Arial;
+                font-size: 25px;
+                margin: 10px 10px 10px 0px;
+            }
+
+            .task_js {
+                color: black;
+                font-family: Arial;
+            }
+
+            .contentLabel_js {
+                color: black;
+                font-family: Arial;
+                font-size: 25px;
+                margin: 10px 10px 10px 0px;
+            }
+
+            .content_js {
+                color: black;
+                font-family: Arial;
+            }
+
+            .deadlineLabel_js {
+                color: black;
+                font-family: Arial;
+                font-size: 25px;
+                margin: 10px 10px 10px 0px;
+            }
+
+            .status_js {
+                font-size: 15px;
+                background-color: #3291FF;
+                border-style: none;
+                margin: 20px 5px 20px 10px;
+            }
+
+            .button {
+                display: flex;
+                margin: 10px 5px 20px 30px;
+            }
+
+            .deadline_js {
+                color: black;
+
+                font-family: Arial;
+            }
+        </style>
+
     </main>
-    <!-- JavaScript -->
-    <script>
-        let calendarEl = document.getElementById('calendar');
-        const date = new Date();
-        const currentYear = date.getFullYear();
-        const currentMonth = date.getMonth();
-
-        let currentDisplayedMonth = currentMonth;
-        let currentDisplayedYear = currentYear;
-
-        // 指定された年と月に基づいてカレンダーグリッドを更新する関数
-        function updateCalendar(year, month) {
-            let daysInMonth = new Date(year, month + 1, 0).getDate();
-            let calendarHtml = '<table><thead><tr>';
-            for (let i = 0; i < 7; i++) {
-                calendarHtml += `<th>${['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][i]}</th>`;
-            }
-            calendarHtml += '</tr></thead><tbody><tr>';
-
-            for (let i = 1; i <= daysInMonth; i++) {
-                const dayOfWeek = new Date(year, month, i).getDay();
-                if (i === 1) {
-                    calendarHtml += '<tr>';
-                    for (let j = 0; j < dayOfWeek; j++) {
-                        calendarHtml += '<td></td>';
-                    }
-                }
-                let cellId = `${year}${(month + 1).toString().padStart(2, '0')}${i.toString().padStart(2, '0')}`;
-                //TODO: ここにif文を追加して予定があった時のみボタンが出るように書き換える。
-                //予定がない時はelse文を用いてその下にコメントアウトしてあるcalendarHtmlに飛ぶようにする。
-                calendarHtml += `<td><button class="day-button" onclick="openModal('${cellId}')"><span>${i}</span></button><div id="${cellId}" class="taskTitleCell"></div></td>`;
-                //calendarHtml += `<td><span class="font ${i <= daysInMonth ? '' : 'hidden'}">${i}</span><div id="${cellId}" class="taskTitleCell"></div></td>`;                
-                if (dayOfWeek === 6) {
-                    calendarHtml += '</tr>';
-                    if (i < daysInMonth) {
-                        calendarHtml += '<tr>';
-                    }
-                } else if (i === daysInMonth) {
-                    for (let j = dayOfWeek + 1; j <= 6; j++) {
-                        calendarHtml += '<td></td>';
-                    }
-                    calendarHtml += '</tr>';
-                }
-            }
-            calendarHtml += '</tbody></table>';
-            calendarEl.innerHTML = calendarHtml;
-        }
-        // ヘッダーに表示されている月と年を更新する関数
-        function updateDisplayedYYYYMM(year, month) {
-            document.getElementById('currentDisplayedYYYYMM').innerHTML = `${year}/${(month + 1).toString().padStart(2, '0')}`;
-        }
-        // モーダルウィンドウを開く関数
-        function openModal(date) {
-            const modalContent = document.getElementById('modalContent');
-            modalContent.innerText = 'ここに予定の内容を入れる';
-            const modalOverlay = document.getElementById('modalOverlay');
-            const modal = document.getElementById('myModal');
-            modalOverlay.style.display = 'block';
-            modal.style.display = 'block';
-        }
-
-        // モーダルウィンドウを閉じる関数
-        function closeModal() {
-            const modalOverlay = document.getElementById('modalOverlay');
-            const modal = document.getElementById('myModal');
-            modalOverlay.style.display = 'none';
-            modal.style.display = 'none';
-        }
-        //前月
-        function prevClick() {
-            currentDisplayedMonth--;
-            if (currentDisplayedMonth < 0) {
-                currentDisplayedMonth = 11;
-                currentDisplayedYear--;
-            }
-            updateCalendar(currentDisplayedYear, currentDisplayedMonth);
-            updateDisplayedYYYYMM(currentDisplayedYear, currentDisplayedMonth);
-        }
-        //翌月
-        function nextClick() {
-            currentDisplayedMonth++;
-            if (currentDisplayedMonth > 11) {
-                currentDisplayedMonth = 0;
-                currentDisplayedYear++;
-            }
-            updateCalendar(currentDisplayedYear, currentDisplayedMonth);
-            updateDisplayedYYYYMM(currentDisplayedYear, currentDisplayedMonth);
-        }
-        window.onload = function() {
-            updateCalendar(currentDisplayedYear, currentDisplayedMonth);
-            updateDisplayedYYYYMM(currentDisplayedYear, currentDisplayedMonth);
-        };
-    </script>
 </body>
 
 </html>
