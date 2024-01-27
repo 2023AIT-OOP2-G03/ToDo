@@ -36,6 +36,8 @@ def index(message=None):
                 return render_template("todo.html", message=c_username)
             else:
                 nologintoken = True
+        else:
+            nologintoken = True
 
     if (nologintoken):
         return render_template("login.html", message=message)
