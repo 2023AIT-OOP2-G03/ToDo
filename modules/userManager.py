@@ -127,7 +127,10 @@ def get_loginToken(id):
         # ログイントークンを取得
         loginToken_file_path = LOGIN_TOKEN_FILE_PATH
         loginTokens = json.load(open(loginToken_file_path, 'r'))
-        return loginTokens[id]
+        if id in loginTokens:
+            return loginTokens[id]
+        else:
+            return None
     else:
         return None
 
