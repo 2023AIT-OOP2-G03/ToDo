@@ -24,6 +24,7 @@ def registration():
 
 
 #ログインページ
+@app.route('/todo.html', methods=["GET"])
 @app.route('/', methods=["GET"])
 def index(message=None):
     nologintoken = True
