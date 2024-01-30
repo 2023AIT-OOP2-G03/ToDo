@@ -33,6 +33,17 @@ button {
     cursor: pointer;
 }
 
+#userID {
+    float: left;
+    padding: 15px 10px 10px 0px;
+}
+
+#username {
+    display: flex;
+    padding: 15px 10px 10px 0px;
+    /* justify-content: flex-end; */
+}
+
 #currentDisplayedYYYYMM {
     text-align: center;
     font-size: 18px;
@@ -61,6 +72,10 @@ th, td {
 html {
     min-width: 100vw;
     min-height: 100vh;
+}
+
+header {
+    text-align: center;
 }
 
 /* 日付ボタンのスタイル */
