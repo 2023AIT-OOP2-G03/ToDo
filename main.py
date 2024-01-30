@@ -119,9 +119,15 @@ def change_todo():
     return jsonify(todo_data)
 
 #カレンダーページ
-@app.route('/calender', methods=["GET"])
+@app.route('/calender', methods=["GET", "POST"])
 def calender():
-    return render_template("calender.html")
+    c_username = request.cookies.get('username', None)
+    if request.method == "GET":
+        return render_template("calender.html", message=c_username)
+    elif request.method == "POST":
+        username = request.form.get('user', None)
+        todo_data = todolistManager.get_tasks(username)
+        return jsonify(todo_data)
 
 #管理者ページ
 @app.route('/admin', methods=["GET"])
