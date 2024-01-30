@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='calendar.css') }}"> <!-- use this -->
     <!-- <style> was moved to 'calendar.css' -->
-    
+
 </head>
 
 <body>
@@ -16,10 +16,12 @@
     <div id="header">
         <div id="currentDisplayedYYYYMM"></div>
         <button id="prevMonth" onclick="prevClick()">< Preview</button>
-        <button id="nextMonth" onclick="nextClick()">Next    ></button>
+                <button id="nextMonth" onclick="nextClick()">Next ></button>
     </div>
 
-    <button id="jumpToList" onclick="location.href='./todo.html'">ToDo List is here</button>
+    <form action="/" method="POST">
+        <input type="submit" value='ToDo List is Here!'>
+    </form>
 
     <div id="calendar"></div>
 
@@ -126,7 +128,8 @@
             updateDisplayedYYYYMM(currentDisplayedYear, currentDisplayedMonth);
         }
 
-        window.onload = function() {
+        //ページ読み込み時にカレンダーを表示する
+        window.onload = function () {
             updateCalendar(currentDisplayedYear, currentDisplayedMonth);
             updateDisplayedYYYYMM(currentDisplayedYear, currentDisplayedMonth);
         };
