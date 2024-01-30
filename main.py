@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, make_response
 from modules import login, userManager
 from modules.todo import todolistManager, taskManager
 from datetime import datetime as dt
+import uuid
 
 app = Flask(__name__, static_folder='web/static', template_folder='web/templates')
 
@@ -25,7 +26,23 @@ def registration():
 #ログインページ
 @app.route('/', methods=["GET"])
 def index(message=None):
-    return render_template("login.html", message=message)
+    nologintoken = True
+    c_logintoken = request.cookies.get('loginToken', None)
+    c_username = request.cookies.get('username', None)
+    if (c_logintoken!=None and c_username!=None):
+        nologintoken = False
+        if(
+            userManager.check(c_username) and
+            userManager.get_loginToken(c_username) == userManager.get_digest(c_logintoken)
+        ):
+            return render_template("todo.html", message=c_username)
+        else:
+            nologintoken = True
+
+    if (nologintoken):
+        return render_template("login.html", message=message)
+    else:
+        render_template("todo.html", message=c_username)
 
 @app.route('/', methods=["POST"])
 def login_():
@@ -33,7 +50,19 @@ def login_():
     password = request.form.get('pw', None)
     if (username==None and password==None): return index()
     result = login.login(username, password)
-    if (result==True): return render_template("todo.html", message=username)
+    if (result==True):
+        # uuidを発行し、それをloginTokenとする
+        loginToken = str(uuid.uuid4())
+        # サーバー側には、ハッシュ化したものを保存する。
+        hashed_loginToken = userManager.get_digest(loginToken)
+        userManager.set_loginToken(username, hashed_loginToken)
+        res = make_response(render_template("todo.html", message=username))
+        # cookieにloginTokenを保存
+        max_age = 60 * 60 * 24 * 7 # 7 days
+        expires = int(dt.now().timestamp()) + max_age
+        res.set_cookie('loginToken', loginToken, max_age=max_age, expires=expires, path='/', domain=request.host, secure=None, httponly=False)
+        res.set_cookie('username', username, max_age=max_age, expires=expires, path='/', domain=request.host, secure=None, httponly=False)
+        return res
     else: return index(message=result)
 
 
@@ -89,6 +118,10 @@ def change_todo():
 
     return jsonify(todo_data)
 
+#カレンダーページ
+@app.route('/calender', methods=["GET"])
+def calender():
+    return render_template("calender.html")
 
 #管理者ページ
 @app.route('/admin', methods=["GET"])

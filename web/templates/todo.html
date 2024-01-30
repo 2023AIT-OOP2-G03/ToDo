@@ -14,16 +14,23 @@
     <style>
         h1 {
             font-family: Arial;
+            color: black;
             font-size: 50px;
         }
 
+        h2 {
+            color: black;
+        }
+
         header {
-            background-color: dimgrey;
+            background-color: #F4F4F4;
         }
 
         body {
-            background-color: black;
+            background-color: white;
         }
+
+
 
         #message-container,
         #error-container {
@@ -60,6 +67,7 @@
         }
 
         .formName {
+            color: black;
             font-family: Arial;
             font-size: 20px;
             vertical-align: top;
@@ -68,11 +76,14 @@
         #taskInput {
             width: 400px;
             height: 30px;
+            color: black;
+            background-color: white;
         }
 
         #taskContent {
             width: 400px;
-
+            color: black;
+            background-color: white;
         }
 
         .button {
@@ -85,6 +96,34 @@
 
         .deadline-container {
             padding: 0px 5px 15px 0px;
+        }
+
+        .task {
+            font-family: Arial;
+            font-size: 20px;
+            color: black;
+            display: flex;
+            float: left;
+            padding: 20px 5px 20px 0px;
+        }
+
+        #taskStatus {
+            font-family: Arial;
+            display: flex;
+            background-color: white;
+            color: black;
+            margin: 20px 5px 20px 0px;
+        }
+
+        .taskDeadline {
+            font-family: Arial;
+            font-size: 20px;
+            color: black;
+        }
+
+        #taskDeadline {
+            color: black;
+            background-color: white;
         }
     </style>
 
@@ -114,23 +153,27 @@
                     <br>
                 </div>
 
-                <label for="taskDeadline">期限：</label>
-                <input type="datetime-local" id="taskDeadline">
-                <br>
+                <div class="taskDeadline">
+                    <label for="taskDeadline">期限:</label>
+                    <input type="datetime-local" id="taskDeadline">
+                    <br>
+                </div>
 
-                <label for="taskStatus">タスク状態：</label>
+                <label for="taskStatus" class="task">タスク状態:</label>
                 <select id="taskStatus">
                     <option value="0">準備中</option>
                     <option value="1">準備完了</option>
                     <option value="2">実行中</option>
                     <option value="3">完了</option>
                 </select>
-                <button type="button" onclick="addTask()">タスクを追加</button>
+                <button type="button" onclick="addTask()" class="button">タスクを追加</button>
             </form>
             <h2>現在のタスク</h2>
             <ul id="taskList">
                 <!-- タスク表示 -->
-            </ul>
+            </ul><br />
+            <!-- カレンダーに戻るボタン -->
+            <button onclick="location.href='/calender'">カレンダーに戻る</button>
         </section>
 
         <style>
@@ -141,10 +184,62 @@
             .taskItem {
                 font-size: 30px;
             }
+
+            .taskStatus {
+                font-size: 15px;
+            }
+
+            .taskLabel_js {
+                color: black;
+                font-family: Arial;
+                font-size: 25px;
+                margin: 10px 10px 10px 0px;
+            }
+
+            .task_js {
+                color: black;
+                font-family: Arial;
+            }
+
+            .contentLabel_js {
+                color: black;
+                font-family: Arial;
+                font-size: 25px;
+                margin: 10px 10px 10px 0px;
+            }
+
+            .content_js {
+                color: black;
+                font-family: Arial;
+            }
+
+            .deadlineLabel_js {
+                color: black;
+                font-family: Arial;
+                font-size: 25px;
+                margin: 10px 10px 10px 0px;
+            }
+
+            .status_js {
+                font-size: 15px;
+                background-color: #3291FF;
+                border-style: none;
+                margin: 20px 5px 20px 10px;
+            }
+
+            .button {
+                display: flex;
+                margin: 10px 5px 20px 30px;
+            }
+
+            .deadline_js {
+                color: black;
+
+                font-family: Arial;
+            }
         </style>
 
     </main>
-
 </body>
 
 </html>
