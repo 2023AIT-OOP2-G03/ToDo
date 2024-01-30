@@ -58,6 +58,11 @@ th, td {
     text-align: center;
 }
 
+html {
+    min-width: 100vw;
+    min-height: 100vh;
+}
+
 /* 日付ボタンのスタイル */
 .day-button {
     cursor: pointer;
