@@ -11,18 +11,6 @@ let tasklist = document.querySelector('#taskList')
 let formdata = new FormData()
 formdata.append("user", user)
 
-fetch("/todo", {
-    method: "POST",
-    body: formdata
-}).then(response => response.json())
-    .then(data => {
-        // サーバーからの応答を処理
-        createTaskListItem(data)
-    })
-    .catch(error => {
-        console.error('エラー:', error);
-    });
-
 // 指定された年と月に基づいてカレンダーグリッドを更新する関数
 function updateCalendar(year, month) {
     let daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -93,6 +81,17 @@ function prevClick() {
     }
     updateCalendar(currentDisplayedYear, currentDisplayedMonth);
     updateDisplayedYYYYMM(currentDisplayedYear, currentDisplayedMonth);
+    fetch("/calender", {
+        method: "post",
+        body: formdata
+    }).then(response => response.json())
+        .then(data => {
+            // サーバーからの応答を処理
+            createTaskListItem(data)
+        })
+        .catch(error => {
+            console.error('エラー:', error);
+        });
 }
 
 //翌月
@@ -104,7 +103,36 @@ function nextClick() {
     }
     updateCalendar(currentDisplayedYear, currentDisplayedMonth);
     updateDisplayedYYYYMM(currentDisplayedYear, currentDisplayedMonth);
+    fetch("/calender", {
+        method: "post",
+        body: formdata
+    }).then(response => response.json())
+        .then(data => {
+            // サーバーからの応答を処理
+            createTaskListItem(data)
+        })
+        .catch(error => {
+            console.error('エラー:', error);
+        });
 }
+
+function createTaskListItem(data) {
+    Object.values(data).forEach(task => {
+        // タスクの日付を解析し、カレンダーセルIDを生成
+        const taskDate = new Date(task.timeLimit);
+        const cellId = `d${taskDate.getFullYear()}${(taskDate.getMonth() + 1).toString().padStart(2, '0')}${taskDate.getDate().toString().padStart(2, '0')}`;
+        
+        // 対応するカレンダーセルを見つける
+        const dateCell = document.getElementById(cellId);
+        if (dateCell) {
+            // タスクのタイトルを表示
+            const taskTitle = document.createElement('div');
+            taskTitle.textContent = task.name;
+            dateCell.appendChild(taskTitle);
+        }
+    });
+}
+
 
 //ページ読み込み時にカレンダーを表示する
 window.onload = function () {
@@ -129,24 +157,6 @@ window.onload = function () {
         });
 };
 
-
-
-function createTaskListItem(data) {
-    Object.values(data).forEach(task => {
-        // タスクの日付を解析し、カレンダーセルIDを生成
-        const taskDate = new Date(task.timeLimit);
-        const cellId = `d${taskDate.getFullYear()}${(taskDate.getMonth() + 1).toString().padStart(2, '0')}${taskDate.getDate().toString().padStart(2, '0')}`;
-        
-        // 対応するカレンダーセルを見つける
-        const dateCell = document.getElementById(cellId);
-        if (dateCell) {
-            // タスクのタイトルを表示
-            const taskTitle = document.createElement('div');
-            taskTitle.textContent = task.name;
-            dateCell.appendChild(taskTitle);
-        }
-    });
-}
 
 // "/"と空白と時刻部分を削除する
 function parseDateWithReplace(inputDate) {
