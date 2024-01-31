@@ -24,6 +24,7 @@ def registration():
 
 
 #ログインページ
+@app.route('/todo.html', methods=["GET"])
 @app.route('/', methods=["GET"])
 def index(message=None):
     nologintoken = True
@@ -31,11 +32,13 @@ def index(message=None):
     c_username = request.cookies.get('username', None)
     if (c_logintoken!=None and c_username!=None):
         nologintoken = False
-        if (userManager.check(c_username)):
-            if (userManager.get_loginToken(c_username) == userManager.get_digest(c_logintoken)):
-                return render_template("todo.html", message=c_username)
-            else:
-                nologintoken = True
+        if(
+            userManager.check(c_username) and
+            userManager.get_loginToken(c_username) == userManager.get_digest(c_logintoken)
+        ):
+            return render_template("todo.html", message=c_username)
+        else:
+            nologintoken = True
 
     if (nologintoken):
         return render_template("login.html", message=message)
