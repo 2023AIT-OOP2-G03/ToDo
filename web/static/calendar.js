@@ -6,6 +6,23 @@ const currentMonth = date.getMonth();
 let currentDisplayedMonth = currentMonth;
 let currentDisplayedYear = currentYear;
 
+let user = document.querySelector('#username').textContent
+let tasklist = document.querySelector('#taskList')
+let formdata = new FormData()
+formdata.append("user", user)
+
+fetch("/todo", {
+    method: "POST",
+    body: formdata
+}).then(response => response.json())
+    .then(data => {
+        // サーバーからの応答を処理
+        createTaskListItem(data)
+    })
+    .catch(error => {
+        console.error('エラー:', error);
+    });
+
 // 指定された年と月に基づいてカレンダーグリッドを更新する関数
 function updateCalendar(year, month) {
     let daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -115,108 +132,20 @@ window.onload = function () {
 
 
 function createTaskListItem(data) {
-    let YYYYMMnow = currentDisplayedYear.toString() + (currentDisplayedMonth + 1).toString().padStart(2, '0');
-    keys = Object.keys(data)
-
-    // loop for each task
-    for (i = 0; i < keys.length; i++) {
-        let datas = Object.values(data)[i]  // from JSON
-        let limitDate = parseDateWithReplace(datas.timeLimit);
-        let getId = 'd' + limitDate;
-        let dateId = document.getElementById(getId);
+    Object.values(data).forEach(task => {
+        // タスクの日付を解析し、カレンダーセルIDを生成
+        const taskDate = new Date(task.timeLimit);
+        const cellId = `d${taskDate.getFullYear()}${(taskDate.getMonth() + 1).toString().padStart(2, '0')}${taskDate.getDate().toString().padStart(2, '0')}`;
         
-        console.log("--------------------");
-        console.log("key : " + keys[i]);
-        console.log(datas.name);
-        console.log(datas.description);
-        console.log(datas.status);
-        console.log(datas.timeLimit);
-
-        console.log("YYYYMMnow : " + YYYYMMnow);
-        console.log("limitDate : " + limitDate);
-        console.log("limitDate.substring(0, 6) : " + limitDate.substring(0, 6));
-        console.log("getId : " + getId);
-        console.log("dateId : " + dateId);
-
-        // Loop through each element with the specified class
-        Array.from(dateId).forEach(dateId => {
-            dateId.innerHTML = limitDate;
-
-        if (YYYYMMnow == limitDate.substring(0, 6)) {
-            let listHTML = '<p>'   // 文字列連結先
-            //listItem.className = 'taskItem';
-            listHTML += `${datas.name}</p></br>`;    // タスク名
-
-            // ラベルたぶんいらない
-            // // タスクラベル
-            // taskLabel = document.createElement('label');
-            // taskLabel.textContent = 'タスク:';
-            // taskLabel.setAttribute('class', 'taskLabel_js');
-            // listItem.appendChild(taskLabel);
-            // タスク名
-            /* taskText = document.createElement('span');
-            taskText.textContent = datas.name;
-            taskText.setAttribute('class', 'task_js')
-            listItem.appendChild(taskText);
-            // 見た目を整える用
-            taskBreak = document.createElement('br');
-            listItem.appendChild(taskBreak);
-
-            console.log("listItem : " + listItem); */
-
-           /*  // タスク内容ラベル
-            taskLabel = document.createElement('label');
-            taskLabel.textContent = '内容:';
-            taskLabel.setAttribute('class', 'contentLabel_js');
-            listItem.appendChild(taskLabel);
-            // タスク内容
-            contentText = document.createElement('span');
-            contentText.textContent = datas.description;
-            contentText.setAttribute('class', 'content_js')
-            listItem.appendChild(contentText);
-            // 見た目を整える用
-            taskBreak = document.createElement('br');
-            listItem.appendChild(taskBreak);
-
-            // 期限ラベル
-            taskLabel = document.createElement('label');
-            taskLabel.textContent = '期限:';
-            taskLabel.setAttribute('class', 'deadlineLabel_js');
-            listItem.appendChild(taskLabel);
-            // 期限
-            deadlineText = document.createElement('span');
-            deadlineText.textContent = datas.timeLimit;
-            deadlineText.setAttribute('class', 'deadline_js')
-            listItem.appendChild(deadlineText);
-    
-            // 状態
-            statusSelect = document.createElement('select');
-            statusSelect.setAttribute('id', keys[i]);
-            statusSelect.setAttribute('class', 'status_js');
-    
-            for (j = 0; j < 4; j++) {
-                statusText = document.createElement('option');
-                statusText.textContent = changeTaskStatus(j);
-                statusText.setAttribute('value', j);
-                if (j == changeTaskStatus(datas.status)) statusText.setAttribute('selected', '');
-                statusSelect.appendChild(statusText);
-            }
-    
-            listItem.appendChild(statusSelect);
-
-            // 見た目を整える用
-            taskBreak = document.createElement('br');
-            listItem.appendChild(taskBreak); */
-
-            //dateId.appendChild(listItem);
-
-            //dateId.innerHTML += listHTML;
-            console.log("listHTML : " + listHTML);
+        // 対応するカレンダーセルを見つける
+        const dateCell = document.getElementById(cellId);
+        if (dateCell) {
+            // タスクのタイトルを表示
+            const taskTitle = document.createElement('div');
+            taskTitle.textContent = task.name;
+            dateCell.appendChild(taskTitle);
         }
     });
-
-    // document.getElementById('displayedYYYYMM').innerHTML + 'aaaaa';
-    }
 }
 
 // "/"と空白と時刻部分を削除する
