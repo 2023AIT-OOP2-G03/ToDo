@@ -55,9 +55,25 @@ function updateDisplayedYYYYMM(year, month) {
 }
 
 // モーダルウィンドウを開く関数
-function openModal(date) {
+function openModal(cellId) {
+    const dateCell = document.getElementById(cellId);
+    const tasksData = dateCell.getAttribute('data-tasks');
+
     const modalContent = document.getElementById('modalContent');
-    modalContent.innerText = 'ここに予定の内容を入れる';
+    modalContent.innerHTML = ''; // コンテンツをクリア
+
+    if (tasksData) {
+        const tasks = JSON.parse(tasksData);
+        tasks.forEach(task => {
+            // 各タスクの詳細を追加
+            const taskDiv = document.createElement('div');
+            taskDiv.innerHTML = `<h3>${task.name}</h3><p>${task.description}</p>`;
+            modalContent.appendChild(taskDiv);
+        });
+    } else {
+        modalContent.innerText = 'この日にはタスクがありません。';
+    }
+
     const modalOverlay = document.getElementById('modalOverlay');
     const modal = document.getElementById('myModal');
     modalOverlay.style.display = 'block';
@@ -117,20 +133,38 @@ function nextClick() {
 }
 
 function createTaskListItem(data) {
+    const tasksByDate = {};
+
+    // タスクを日付ごとにグループ化
     Object.values(data).forEach(task => {
-        // タスクの日付を解析し、カレンダーセルIDを生成
         const taskDate = new Date(task.timeLimit);
         const cellId = `d${taskDate.getFullYear()}${(taskDate.getMonth() + 1).toString().padStart(2, '0')}${taskDate.getDate().toString().padStart(2, '0')}`;
-        
-        // 対応するカレンダーセルを見つける
+
+        if (!tasksByDate[cellId]) {
+            tasksByDate[cellId] = [];
+        }
+        tasksByDate[cellId].push(task);
+    });
+
+    // 各日付のセルにタスクのタイトルを追加
+    for (const cellId in tasksByDate) {
         const dateCell = document.getElementById(cellId);
         if (dateCell) {
-            // タスクのタイトルを表示
-            const taskTitle = document.createElement('div');
-            taskTitle.textContent = task.name;
-            dateCell.appendChild(taskTitle);
+            const tasksDiv = document.createElement('div');
+            tasksDiv.className = 'task-list';
+
+            tasksByDate[cellId].forEach(task => {
+                const taskTitle = document.createElement('div');
+                taskTitle.textContent = task.name;
+                taskTitle.className = 'task-title';
+                tasksDiv.appendChild(taskTitle);
+            });
+
+            dateCell.appendChild(tasksDiv);
+            // タスクの詳細情報をセルの属性として格納
+            dateCell.setAttribute('data-tasks', JSON.stringify(tasksByDate[cellId]));
         }
-    });
+    }
 }
 
 
