@@ -93,26 +93,26 @@ function nextClick() {
 window.onload = function () {
     updateCalendar(currentDisplayedYear, currentDisplayedMonth);
     updateDisplayedYYYYMM(currentDisplayedYear, currentDisplayedMonth);
+    let user = document.querySelector('#username').textContent
+    //let tasklist = document.querySelector('#taskList')
+    let formdata = new FormData()
+    formdata.append("user", user)
+    
+    // request json data from server
+    fetch("/calender", {
+        method: "post",
+        body: formdata
+    }).then(response => response.json())
+        .then(data => {
+            // サーバーからの応答を処理
+            createTaskListItem(data)
+        })
+        .catch(error => {
+            console.error('エラー:', error);
+        });
 };
 
 
-let user = document.querySelector('#username').textContent
-//let tasklist = document.querySelector('#taskList')
-let formdata = new FormData()
-formdata.append("user", user)
-
-// request json data from server
-fetch("/calender", {
-    method: "post",
-    body: formdata
-}).then(response => response.json())
-    .then(data => {
-        // サーバーからの応答を処理
-        createTaskListItem(data)
-    })
-    .catch(error => {
-        console.error('エラー:', error);
-    });
 
 function createTaskListItem(data) {
     let YYYYMMnow = currentDisplayedYear.toString() + (currentDisplayedMonth + 1).toString().padStart(2, '0');
