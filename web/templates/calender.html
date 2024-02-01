@@ -5,21 +5,29 @@
     <meta charset="UTF-8">
     <title>Calendar | Task Flower</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css"> -->
     <link rel="stylesheet" href="{{ url_for('static', filename='calendar.css') }}"> <!-- use this -->
     <!-- <style> was moved to 'calendar.css' -->
-    
+
+    <script defer src="{{ url_for('static', filename='calendar.js') }}"></script>
 </head>
 
 <body>
-    <!-- カレンダーのヘッダーおよびナビゲーションボタン -->
-    <h1>Calendar</h1>
-    <div id="header">
+    <header>
+        <!-- カレンダーのヘッダーおよびナビゲーションボタン -->
+        <h1>Calendar</h1>
+        {% if message %}
+        <h2 id="userID">ユーザID: </h2>
+        <h2 id="username" class="username">{{ message }}</h2>
+        {% endif %}
         <div id="currentDisplayedYYYYMM"></div>
-        <button id="prevMonth" onclick="prevClick()">< Preview</button>
-        <button id="nextMonth" onclick="nextClick()">Next    ></button>
-    </div>
-
-    <button id="jumpToList" onclick="location.href='./todo.html'">ToDo List is here</button>
+        <button id="prevMonth" onclick="prevClick()">← Prev</button>
+        <button id="nextMonth" onclick="nextClick()">Next →</button>
+        <br>
+        <form action="/" method="POST">
+            <input type="submit" value='ToDo Listへ'>
+        </form>
+    </header>
 
     <div id="calendar"></div>
 
@@ -35,7 +43,7 @@
     </div>
 
     <script>
-        let calendarEl = document.getElementById('calendar');
+       /*  let calendarEl = document.getElementById('calendar');
         const date = new Date();
         const currentYear = date.getFullYear();
         const currentMonth = date.getMonth();
@@ -126,11 +134,12 @@
             updateDisplayedYYYYMM(currentDisplayedYear, currentDisplayedMonth);
         }
 
-        window.onload = function() {
+        //ページ読み込み時にカレンダーを表示する
+        window.onload = function () {
             updateCalendar(currentDisplayedYear, currentDisplayedMonth);
             updateDisplayedYYYYMM(currentDisplayedYear, currentDisplayedMonth);
         };
-
+ */
     </script>
 </body>
 
