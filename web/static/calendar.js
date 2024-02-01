@@ -67,7 +67,7 @@ function openModal(cellId) {
         tasks.forEach(task => {
             // 各タスクの詳細を追加
             const taskDiv = document.createElement('div');
-            taskDiv.innerHTML = `<h3>${task.name}</h3><p>${task.description}</p>`;
+            taskDiv.innerHTML = `<h3>${task.name}</h3><p>${task.description}</p><p>${task.status}</p>`;
             modalContent.appendChild(taskDiv);
         });
     } else {
